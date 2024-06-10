@@ -264,6 +264,19 @@ public class FXMLCadProdController {
     }
 
     public void updateProduct() {
+
+        if (txt_cad_nomeProd.getText().isEmpty() || txt_cad_tipoProd.getText().isEmpty()
+                || txt_cad_descProd.getText().isEmpty() || txt_cad_valProd.getText().isEmpty()
+                || txt_cad_qtdProd.getText().isEmpty()) {
+
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Message");
+            alert.setHeaderText(null);
+            alert.setContentText("Preencha todos os campos!");
+            alert.showAndWait();
+            return;
+        }
+
         String updateQuery = "UPDATE produtos SET NomeDoProduto = ?, Tipo = ?, Descricao = ?, Valor = ?, Quantidade = ? WHERE ID = ?";
 
         try {
@@ -301,6 +314,19 @@ public class FXMLCadProdController {
     }
 
     public void deleteProduct() {
+
+        if (txt_cad_nomeProd.getText().isEmpty() || txt_cad_tipoProd.getText().isEmpty()
+                || txt_cad_descProd.getText().isEmpty() || txt_cad_valProd.getText().isEmpty()
+                || txt_cad_qtdProd.getText().isEmpty()) {
+
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Message");
+            alert.setHeaderText(null);
+            alert.setContentText("Preencha todos os campos!");
+            alert.showAndWait();
+            return;
+        }
+
         String deleteQuery = "DELETE FROM produtos WHERE ID = ?";
 
         try {
