@@ -205,6 +205,20 @@ public class FXMLConsultaProdutoController {
     }
 
     public void updateProduct() {
+        
+        if (txt_consult_nomeProd.getText().isEmpty() || txt_consult_tipoProd.getText().isEmpty()
+                || txt_consult_descProd.getText().isEmpty() || txt_consult_qtdProd.getText().isEmpty()
+                || txt_consult_valProd.getText().isEmpty() || txt_consult_cnpjProd.getText().isEmpty()) {
+
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Message");
+            alert.setHeaderText(null);
+            alert.setContentText("Preencha todos os campos!");
+            alert.showAndWait();
+            return;
+        }        
+        
+        
         String updateQuery = "UPDATE produtos SET NomeDoProduto = ?, Tipo = ?, Descricao = ?, Valor = ?, Quantidade = ? WHERE CNPJ = ?";
 
         try {
@@ -242,6 +256,23 @@ public class FXMLConsultaProdutoController {
     }
 
     public void deleteProduct() {
+        
+            // Verifica se os campos estão preenchidos
+        if (txt_consult_nomeProd.getText().isEmpty() || txt_consult_tipoProd.getText().isEmpty()
+                || txt_consult_descProd.getText().isEmpty() || txt_consult_qtdProd.getText().isEmpty()
+                || txt_consult_valProd.getText().isEmpty() || txt_consult_cnpjProd.getText().isEmpty()) {
+
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Message");
+            alert.setHeaderText(null);
+            alert.setContentText("Preencha todos os campos!");
+            alert.showAndWait();
+            return;
+        }
+    
+        
+        
+        
         String deleteQuery = "DELETE FROM produtos WHERE CNPJ = ?";
 
         try {
