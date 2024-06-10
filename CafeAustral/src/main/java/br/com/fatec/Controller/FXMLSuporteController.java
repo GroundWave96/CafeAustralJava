@@ -4,44 +4,23 @@
  */
 package br.com.fatec.Controller;
 
-import br.com.fatec.DATABASE.DataBase;
 import com.jfoenix.controls.JFXButton;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-
-import java.sql.SQLException;
-
 import br.com.fatec.DATABASE.DataBase;
-
 import java.sql.SQLException;
-
-import java.sql.SQLException;
-
-import java.sql.SQLException;
-
 import javafx.scene.control.Alert;
-
-import javafx.scene.control.Alert;
-
-import javafx.fxml.FXML;
-
-import javafx.scene.control.TableColumn;
 
 import javafx.fxml.FXML;
 
@@ -67,6 +46,7 @@ public class FXMLSuporteController {
             this.cnpj = cnpj;
             this.sobre = sobre;
             this.descricao = descricao;
+            this.situacao = situacao;
         }
 
         // Getters
@@ -212,7 +192,7 @@ public class FXMLSuporteController {
             prepare.setString(1, txt_sup_cnpj.getText());
             prepare.setString(2, txt_sup_sobre.getText());
             prepare.setString(3, txt_sup_desc.getText());
-            prepare.setString(4, "Aguardando");
+            prepare.setString(4, "Aberto");
 
             int rowsInserted = prepare.executeUpdate();
             if (rowsInserted > 0) {
@@ -228,6 +208,18 @@ public class FXMLSuporteController {
     }
 
     public void deleteSuporte() {
+
+        if (txt_sup_sobre.getText().isEmpty()
+                || txt_sup_desc.getText().isEmpty()) {
+
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Message");
+            alert.setHeaderText(null);
+            alert.setContentText("Preencha todos os campos!");
+            alert.showAndWait();
+            return;
+        }
+
         String deleteQuery = "DELETE FROM suporte WHERE ID = ?";
 
         try {
@@ -258,6 +250,18 @@ public class FXMLSuporteController {
     }
 
     public void updateSuporte() {
+
+        if (txt_sup_sobre.getText().isEmpty()
+                || txt_sup_desc.getText().isEmpty()) {
+
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Message");
+            alert.setHeaderText(null);
+            alert.setContentText("Preencha todos os campos!");
+            alert.showAndWait();
+            return;
+        }
+
         String updateQuery = "UPDATE suporte SET Sobre = ?, Descricao = ? WHERE ID = ?";
 
         try {

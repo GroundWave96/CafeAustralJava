@@ -21,6 +21,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
+
 /**
  *
  * @author vitor
@@ -54,7 +55,6 @@ public class FXMLCadastroAdmController implements Initializable {
     private PreparedStatement stmt;
     private ResultSet result;
     private ResultSet rs = null;
-    
 
     public void menuAdmBack() throws IOException {
         btn_backAdmForm.getScene().getWindow().hide();
@@ -97,7 +97,7 @@ public class FXMLCadastroAdmController implements Initializable {
         String sql = "INSERT INTO administradores (Nome, Sobrenome, Genero, Email, Senha) VALUES (?, ?, ?, ?, ?)";
 
         try {
-
+            conn = DataBase.connectDb();
             // Verifica se o email já está cadastrado
             String checkEmail = "SELECT * FROM administradores WHERE Email = ?";
             stmt = conn.prepareStatement(checkEmail);
@@ -109,7 +109,9 @@ public class FXMLCadastroAdmController implements Initializable {
                 return;
             }
 
-            conn = DataBase.connectDb();
+            stmt.close();
+            result.close();
+
             stmt = conn.prepareStatement(sql);
             stmt.setString(1, txt_userCadAdm.getText());
             stmt.setString(2, txt_telCadAdm.getText());
@@ -120,11 +122,16 @@ public class FXMLCadastroAdmController implements Initializable {
 
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Information Message");
+            alert.setContentText("Administrador cadastrado com sucesso!");
             alert.setHeaderText(null);
+            alert.showAndWait();
 
-            Optional<ButtonType> result = alert.showAndWait();
+            txt_userCadAdm.clear();
+            cmb_genCadAdm.setValue(null);
+            txt_telCadAdm.clear();
+            txt_emailCadAdm.clear();
+            txt_senhaCadAdm.clear();
 
-            exibirAlertaInformacao("Administrador cadastrado com sucesso!");
         } catch (SQLException e) {
             e.printStackTrace();
             exibirAlertaErro("Erro ao cadastrar administrador!");
@@ -389,4 +396,5 @@ public class FXMLCadastroAdmController implements Initializable {
         alert.setContentText(mensagem);
         alert.showAndWait();
     }
+
 }

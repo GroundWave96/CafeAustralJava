@@ -32,7 +32,7 @@
       </AnchorPane>
       <AnchorPane fx:id="frm_cadastroadm" layoutX="493.0" prefHeight="603.0" prefWidth="517.0" style="-fx-background-color: #ECE0D1;">
          <children>
-            <JFXTextField fx:id="txt_userCadForn" focusColor="#634832" labelFloat="true" layoutX="46.0" layoutY="155.0" prefHeight="25.0" prefWidth="420.0" promptText="Usuário" unFocusColor="#dcc2a9">
+            <JFXTextField fx:id="txt_userCadForn" focusColor="#634832" labelFloat="true" layoutX="46.0" layoutY="155.0" prefHeight="25.0" prefWidth="420.0" promptText="Usuário" styleClass="font-text-field" stylesheets="@../css/loginDesing.css" unFocusColor="#dcc2a9">
                <font>
                   <Font size="14.0" />
                </font>
@@ -47,22 +47,22 @@
                   <Font size="20.0" />
                </font>
             </Label>
-            <JFXPasswordField fx:id="txt_senhaCadForn" focusColor="#634832" labelFloat="true" layoutX="46.0" layoutY="367.0" prefHeight="25.0" prefWidth="420.0" promptText="Senha" unFocusColor="#dcc2a9">
+            <JFXPasswordField fx:id="txt_senhaCadForn" focusColor="#634832" labelFloat="true" layoutX="46.0" layoutY="367.0" prefHeight="25.0" prefWidth="420.0" promptText="Senha" styleClass="font-text-field" stylesheets="@../css/loginDesing.css" unFocusColor="#dcc2a9">
                <font>
                   <Font size="14.0" />
                </font>
             </JFXPasswordField>
-            <JFXTextField fx:id="txt_cnpjCadForn" focusColor="#634832" labelFloat="true" layoutX="46.0" layoutY="206.0" prefHeight="30.0" prefWidth="396.0" promptText="CNPJ" unFocusColor="#dcc2a9">
+            <JFXTextField fx:id="txt_cnpjCadForn" focusColor="#634832" labelFloat="true" layoutX="46.0" layoutY="206.0" prefHeight="30.0" prefWidth="396.0" promptText="CNPJ" styleClass="font-text-field" stylesheets="@../css/loginDesing.css" unFocusColor="#dcc2a9">
                <font>
                   <Font size="14.0" />
                </font>
             </JFXTextField>
-            <JFXTextField fx:id="txt_telCadForn" focusColor="#634832" labelFloat="true" layoutX="46.0" layoutY="258.0" prefHeight="25.0" prefWidth="420.0" promptText="Telefone" unFocusColor="#dcc2a9">
+            <JFXTextField fx:id="txt_telCadForn" focusColor="#634832" labelFloat="true" layoutX="46.0" layoutY="258.0" prefHeight="25.0" prefWidth="420.0" promptText="Telefone" styleClass="font-text-field" stylesheets="@../css/loginDesing.css" unFocusColor="#dcc2a9">
                <font>
                   <Font size="14.0" />
                </font>
             </JFXTextField>
-            <JFXTextField fx:id="txt_emailCadForn" focusColor="#634832" labelFloat="true" layoutX="46.0" layoutY="314.0" prefHeight="25.0" prefWidth="420.0" promptText="E-mail" unFocusColor="#dcc2a9">
+            <JFXTextField fx:id="txt_emailCadForn" focusColor="#634832" labelFloat="true" layoutX="46.0" layoutY="314.0" prefHeight="25.0" prefWidth="420.0" promptText="E-mail" styleClass="font-text-field" stylesheets="@../css/loginDesing.css" unFocusColor="#dcc2a9">
                <font>
                   <Font size="14.0" />
                </font>
