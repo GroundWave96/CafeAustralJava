@@ -32,7 +32,7 @@
       </AnchorPane>
       <AnchorPane fx:id="frm_cadastroadm" layoutX="493.0" prefHeight="603.0" prefWidth="517.0" style="-fx-background-color: #ECE0D1;">
          <children>
-            <JFXTextField fx:id="txt_userCadAdm" focusColor="#634832" labelFloat="true" layoutX="46.0" layoutY="155.0" prefHeight="25.0" prefWidth="420.0" promptText="Usuário" styleClass="font-text-field" stylesheets="@../css/loginDesing.css" unFocusColor="#dcc2a9">
+            <JFXTextField fx:id="txt_userCadAdm" focusColor="#634832" labelFloat="true" layoutX="46.0" layoutY="155.0" prefHeight="25.0" prefWidth="420.0" promptText="Nome" styleClass="font-text-field" stylesheets="@../css/loginDesing.css" unFocusColor="#dcc2a9">
                <font>
                   <Font size="14.0" />
                </font>
@@ -57,12 +57,12 @@
                   <Font size="14.0" />
                </font>
             </JFXPasswordField>
-            <JFXTextField fx:id="txt_telCadAdm" focusColor="#634832" labelFloat="true" layoutX="46.0" layoutY="258.0" prefHeight="25.0" prefWidth="420.0" promptText="Sobrenome" styleClass="font-text-field" stylesheets="@../css/loginDesing.css" unFocusColor="#dcc2a9">
+            <JFXTextField fx:id="txt_telCadAdm" focusColor="#634832" labelFloat="true" layoutX="46.0" layoutY="205.0" prefHeight="25.0" prefWidth="420.0" promptText="Sobrenome" styleClass="font-text-field" stylesheets="@../css/loginDesing.css" unFocusColor="#dcc2a9">
                <font>
                   <Font size="14.0" />
                </font>
             </JFXTextField>
-            <JFXTextField fx:id="txt_emailCadAdm" focusColor="#634832" labelFloat="true" layoutX="46.0" layoutY="314.0" prefHeight="25.0" prefWidth="420.0" promptText="E-mail" styleClass="font-text-field" stylesheets="@../css/loginDesing.css" unFocusColor="#dcc2a9">
+            <JFXTextField fx:id="txt_emailCadAdm" focusColor="#634832" labelFloat="true" layoutX="46.0" layoutY="312.0" prefHeight="32.0" prefWidth="346.0" promptText="E-mail" styleClass="font-text-field" stylesheets="@../css/loginDesing.css" unFocusColor="#dcc2a9">
                <font>
                   <Font size="14.0" />
                </font>
@@ -77,7 +77,17 @@
                   <Font name="System Bold" size="14.0" />
                </font>
             </JFXButton>
-            <JFXComboBox fx:id="cmb_genCadAdm" focusColor="#634832" labelFloat="true" layoutX="46.0" layoutY="210.0" prefHeight="25.0" prefWidth="420.0" promptText="Gênero" styleClass="font-text-field" stylesheets="@../css/loginDesing.css" unFocusColor="#dcc2a9" />
+            <JFXComboBox fx:id="cmb_genCadAdm" focusColor="#634832" labelFloat="true" layoutX="46.0" layoutY="263.0" prefHeight="25.0" prefWidth="420.0" promptText="Gênero" styleClass="font-text-field" stylesheets="@../css/loginDesing.css" unFocusColor="#dcc2a9" />
+            <ImageView fx:id="img_pag_limpa" fitHeight="24.0" fitWidth="24.0" layoutX="434.0" layoutY="314.0" onMouseClicked="#limparCampos" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../image/x.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="img_pag_buscaEmail" fitHeight="24.0" fitWidth="24.0" layoutX="402.0" layoutY="314.0" onMouseClicked="#pesquisaEmail" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../image/lupa.png" />
+               </image>
+            </ImageView>
          </children>
       </AnchorPane>
    </children>
