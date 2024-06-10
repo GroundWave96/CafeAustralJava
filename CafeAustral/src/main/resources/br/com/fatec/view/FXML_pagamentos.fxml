@@ -33,7 +33,7 @@
             <TableView fx:id="consutlPag_tabelview" layoutX="13.0" layoutY="11.0" prefHeight="375.0" prefWidth="1008.0">
               <columns>
                 <TableColumn fx:id="consult_pag_id" prefWidth="52.0" text="ID" />
-                <TableColumn fx:id="consult_pag_estado" prefWidth="235.0" text="ESTADO" />
+                <TableColumn fx:id="consult_pag_estado" prefWidth="235.0" text="ESTADO DE ENTREGA" />
                   <TableColumn fx:id="consult_pag_cnpj" prefWidth="289.0" text="CNPJ" />
                   <TableColumn fx:id="consult_pag_val" prefWidth="142.0" text="VALOR" />
                   <TableColumn fx:id="consult_pag_situacao" prefWidth="288.0" text="SITUAÇÃO" />
@@ -44,8 +44,14 @@
                </stylesheets>
             </TableView>
          </children></AnchorPane>
-      <JFXTextField fx:id="consult_pag_buscatb" focusColor="#634832" labelFloat="true" layoutX="33.0" layoutY="85.0" prefHeight="36.0" prefWidth="324.0" promptText="Buscar" styleClass="font-text-field" stylesheets="@../css/loginDesing.css" unFocusColor="#dcc2a9" />
+      <JFXTextField fx:id="consult_pag_busca" focusColor="#634832" labelFloat="true" layoutX="345.0" layoutY="87.0" prefHeight="36.0" prefWidth="324.0" promptText="Buscar" styleClass="font-text-field" stylesheets="@../css/loginDesing.css" unFocusColor="#dcc2a9" />
       <JFXButton fx:id="btn_menuFornecBack" buttonType="RAISED" layoutX="14.0" layoutY="550.0" onAction="#menuFornecBack" prefHeight="36.0" prefWidth="70.0" style="-fx-background-color: #dcc2a9;" text="Voltar" textFill="#634832">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </JFXButton>
+      <JFXComboBox fx:id="cmb_pag_filtro" focusColor="#634832" labelFloat="true" layoutX="33.0" layoutY="87.0" prefHeight="36.0" prefWidth="299.0" promptText="Filtro" styleClass="font-text-field" stylesheets="@../css/loginDesing.css" unFocusColor="#dcc2a9" />
+      <JFXButton fx:id="btn_buscar" buttonType="RAISED" layoutX="681.0" layoutY="87.0" onAction="#buscaAvancada" prefHeight="36.0" prefWidth="97.0" style="-fx-background-color: #dcc2a9;" text="Buscar" textFill="#634832">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
