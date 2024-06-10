@@ -73,18 +73,18 @@ public class FXMLSuporteAdmController {
     @FXML
     private JFXButton btn_menuAdmBack;
 
-        @FXML
-        private TableView<Suporte> sup_tableViewAdm;
-        @FXML
-        private TableColumn<Suporte, Integer> sup_col_idAdm;
-        @FXML
-        private TableColumn<Suporte, String> sup_col_cnpjAdm;
-        @FXML
-        private TableColumn<Suporte, String> sup_col_sobreAdm;
-        @FXML
-        private TableColumn<Suporte, String> sup_col_descAdm;
-        @FXML
-        private TableColumn<Suporte, String> sup_col_situacaoAdm;
+    @FXML
+    private TableView<Suporte> sup_tableViewAdm;
+    @FXML
+    private TableColumn<Suporte, Integer> sup_col_idAdm;
+    @FXML
+    private TableColumn<Suporte, String> sup_col_cnpjAdm;
+    @FXML
+    private TableColumn<Suporte, String> sup_col_sobreAdm;
+    @FXML
+    private TableColumn<Suporte, String> sup_col_descAdm;
+    @FXML
+    private TableColumn<Suporte, String> sup_col_situacaoAdm;
 
     @FXML
     private TextField txt_pag_cnpj;
@@ -167,6 +167,17 @@ public class FXMLSuporteAdmController {
     }
 
     public void updateSuporte() {
+        if (txt_pag_cnpj.getText().isEmpty() || cmb_pag_situacao.getValue().isEmpty()
+                || txt_pag_sobre.getText().isEmpty() || txt_pag_desc.getText().isEmpty()) {
+
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Message");
+            alert.setHeaderText(null);
+            alert.setContentText("Preencha todos os campos!");
+            alert.showAndWait();
+            return;
+        }
+
         String updateQuery = "UPDATE suporte SET Sobre = ?, Descricao = ?, Situacao = ? WHERE CNPJ = ?";
 
         try {
@@ -192,6 +203,17 @@ public class FXMLSuporteAdmController {
     }
 
     public void deleteSuporte() {
+        if (txt_pag_cnpj.getText().isEmpty() || cmb_pag_situacao.getValue().isEmpty()
+                || txt_pag_sobre.getText().isEmpty() || txt_pag_desc.getText().isEmpty()) {
+
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Message");
+            alert.setHeaderText(null);
+            alert.setContentText("Preencha todos os campos!");
+            alert.showAndWait();
+            return;
+        }
+
         String deleteQuery = "DELETE FROM suporte WHERE CNPJ = ?";
 
         try {
