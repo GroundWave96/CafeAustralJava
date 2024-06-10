@@ -33,9 +33,6 @@ public class FXMLCadProdController {
     private JFXButton btn_menuFornBack;
 
     @FXML
-    private ImageView img_cadProdBuscCnpj;
-
-    @FXML
     private TextField txt_cad_cnpjProd;
 
     @FXML
@@ -85,7 +82,6 @@ public class FXMLCadProdController {
 
     @FXML
     public void initialize() {
-        img_cadProdBuscCnpj.setOnMouseClicked(event -> buscarCnpj());
         txt_cad_cnpjProd.setText(getData.cnpj);  // Preenche automaticamente o campo com o CNPJ do fornecedor logado
 
         initTable();
