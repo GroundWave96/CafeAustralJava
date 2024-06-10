@@ -73,18 +73,18 @@ public class FXMLSuporteAdmController {
     @FXML
     private JFXButton btn_menuAdmBack;
 
-    @FXML
-    private TableView<Suporte> sup_tableViewAdm;
-    @FXML
-    private TableColumn<Suporte, Integer> sup_col_idAdm;
-    @FXML
-    private TableColumn<Suporte, String> sup_col_cnpjAdm;
-    @FXML
-    private TableColumn<Suporte, String> sup_col_sobreAdm;
-    @FXML
-    private TableColumn<Suporte, String> sup_col_descAdm;
-    @FXML
-    private TableColumn<Suporte, String> sup_col_situacaoAdm;
+        @FXML
+        private TableView<Suporte> sup_tableViewAdm;
+        @FXML
+        private TableColumn<Suporte, Integer> sup_col_idAdm;
+        @FXML
+        private TableColumn<Suporte, String> sup_col_cnpjAdm;
+        @FXML
+        private TableColumn<Suporte, String> sup_col_sobreAdm;
+        @FXML
+        private TableColumn<Suporte, String> sup_col_descAdm;
+        @FXML
+        private TableColumn<Suporte, String> sup_col_situacaoAdm;
 
     @FXML
     private TextField txt_pag_cnpj;

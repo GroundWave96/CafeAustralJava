@@ -65,14 +65,14 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </JFXButton>
-      <JFXTextField fx:id="txt_pag_sobre" focusColor="#634832" labelFloat="true" layoutX="69.0" layoutY="234.0" prefHeight="36.0" prefWidth="262.0" promptText="Sobre" styleClass="font-text-field" stylesheets="@../css/loginDesing.css" unFocusColor="#dcc2a9" />
-      <JFXTextField fx:id="txt_pag_cnpj" disable="true" focusColor="#634832" labelFloat="true" layoutX="69.0" layoutY="178.0" prefHeight="36.0" prefWidth="262.0" promptText="CNPJ" styleClass="font-text-field" stylesheets="@../css/loginDesing.css" unFocusColor="#dcc2a9" />
+      <JFXTextField fx:id="txt_sup_sobre" focusColor="#634832" labelFloat="true" layoutX="69.0" layoutY="234.0" prefHeight="36.0" prefWidth="262.0" promptText="Sobre" styleClass="font-text-field" stylesheets="@../css/loginDesing.css" unFocusColor="#dcc2a9" />
+      <JFXTextField fx:id="txt_sup_cnpj" disable="true" focusColor="#634832" labelFloat="true" layoutX="69.0" layoutY="178.0" prefHeight="36.0" prefWidth="262.0" promptText="CNPJ" styleClass="font-text-field" stylesheets="@../css/loginDesing.css" unFocusColor="#dcc2a9" />
       <JFXButton fx:id="btn_supAdd" buttonType="RAISED" layoutX="69.0" layoutY="358.0" prefHeight="40.0" prefWidth="110.0" style="-fx-background-color: #dcc2a9; -fx-background-radius: 25;" text="Cadastrar" textFill="#634832">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </JFXButton>
-      <JFXTextField fx:id="txt_pag_id" disable="true" focusColor="#634832" labelFloat="true" layoutX="14.0" layoutY="178.0" prefHeight="36.0" prefWidth="49.0" promptText="ID" styleClass="font-text-field" stylesheets="@../css/loginDesing.css" unFocusColor="#dcc2a9" />
-      <JFXTextField fx:id="txt_pag_desc" focusColor="#634832" labelFloat="true" layoutX="69.0" layoutY="286.0" prefHeight="36.0" prefWidth="262.0" promptText="Descrição" styleClass="font-text-field" stylesheets="@../css/loginDesing.css" unFocusColor="#dcc2a9" />
+      <JFXTextField fx:id="txt_sup_id" disable="true" focusColor="#634832" labelFloat="true" layoutX="14.0" layoutY="178.0" prefHeight="36.0" prefWidth="49.0" promptText="ID" styleClass="font-text-field" stylesheets="@../css/loginDesing.css" unFocusColor="#dcc2a9" />
+      <JFXTextField fx:id="txt_sup_desc" focusColor="#634832" labelFloat="true" layoutX="69.0" layoutY="286.0" prefHeight="36.0" prefWidth="262.0" promptText="Descrição" styleClass="font-text-field" stylesheets="@../css/loginDesing.css" unFocusColor="#dcc2a9" />
    </children>
 </AnchorPane>
