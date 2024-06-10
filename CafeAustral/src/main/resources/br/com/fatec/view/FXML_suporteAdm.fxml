@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1100.0" style="-fx-background-color: #ece0d1;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.fatec.Controller.FXMLSuporteAdmController">
+   <children>
+      <ImageView fitHeight="232.0" fitWidth="305.0" layoutX="43.0" layoutY="186.0" opacity="0.25" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../image/cafeIconeBackground.png" />
+         </image>
+      </ImageView>
+      <AnchorPane prefHeight="65.0" prefWidth="1100.0" style="-fx-background-color: #634832;">
+         <children>
+            <ImageView fitHeight="45.0" fitWidth="201.0" layoutX="14.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../image/Logo.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="506.0" layoutY="18.0" text="Suporte" textFill="#ece0d1">
+               <font>
+                  <Font name="Arial" size="25.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="390.0" layoutY="77.0" prefHeight="508.0" prefWidth="696.0" stylesheets="@../css/admMenuDesign.css">
+         <styleClass>
+            <String fx:value="shadow" />
+            <String fx:value="bg-cler-brown" />
+         </styleClass>
+         <children>
+            <TableView fx:id="sup_tableViewAdm" layoutX="12.0" layoutY="11.0" prefHeight="485.0" prefWidth="670.0" stylesheets="@../css/cadProdDesing.css">
+              <columns>
+                <TableColumn fx:id="sup_col_idAdm" prefWidth="49.0" text="ID" />
+                <TableColumn fx:id="sup_col_cnpjAdm" prefWidth="144.0" text="CNPJ" />
+                  <TableColumn fx:id="sup_col_sobreAdm" prefWidth="117.0" text="SOBRE" />
+                  <TableColumn fx:id="sup_col_descAdm" prefWidth="179.0" text="DESCRIÇÃO" />
+                  <TableColumn fx:id="sup_col_situacaoAdm" prefWidth="180.0" text="SITUAÇÃO" />
+              </columns>
+            </TableView>
+         </children></AnchorPane>
+      <JFXButton fx:id="btn_menuAdmBack" buttonType="RAISED" layoutX="14.0" layoutY="550.0" onAction="#menuAdmBack" prefHeight="36.0" prefWidth="70.0" style="-fx-background-color: #dcc2a9;" text="Voltar" textFill="#634832">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </JFXButton>
+      <ImageView fx:id="img_pag_buscaCnpj" fitHeight="24.0" fitWidth="24.0" layoutX="274.0" layoutY="169.0" onMouseClicked="#updateTableCNPJ" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../image/lupa.png" />
+         </image>
+      </ImageView>
+      <JFXButton fx:id="btn_supDelAdm" buttonType="RAISED" layoutX="143.0" layoutY="469.0" onAction="#deleteSuporte" prefHeight="40.0" prefWidth="110.0" style="-fx-background-color: #dcc2a9; -fx-background-radius: 25;" text="Excluir" textFill="#634832">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="btn_supClearAdm" buttonType="RAISED" layoutX="69.0" layoutY="412.0" onAction="#clearFields" prefHeight="40.0" prefWidth="110.0" style="-fx-background-color: #dcc2a9; -fx-background-radius: 25;" text="Limpar" textFill="#634832">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="btn_supEditAdm" buttonType="RAISED" layoutX="215.0" layoutY="412.0" onAction="#updateSuporte" prefHeight="40.0" prefWidth="110.0" style="-fx-background-color: #dcc2a9; -fx-background-radius: 25;" text="Editar" textFill="#634832">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </JFXButton>
+      <JFXTextField fx:id="txt_pag_sobre" focusColor="#634832" labelFloat="true" layoutX="69.0" layoutY="278.0" prefHeight="36.0" prefWidth="262.0" promptText="Sobre" styleClass="font-text-field" stylesheets="@../css/loginDesing.css" unFocusColor="#dcc2a9" />
+      <JFXTextField fx:id="txt_pag_cnpj" focusColor="#634832" labelFloat="true" layoutX="69.0" layoutY="163.0" prefHeight="36.0" prefWidth="194.0" promptText="CNPJ" styleClass="font-text-field" stylesheets="@../css/loginDesing.css" unFocusColor="#dcc2a9" />
+      <JFXComboBox fx:id="cmb_pag_situacao" focusColor="#634832" labelFloat="true" layoutX="69.0" layoutY="220.0" prefHeight="36.0" prefWidth="262.0" promptText="Situação" styleClass="font-text-field" stylesheets="@../css/loginDesing.css" unFocusColor="#dcc2a9" />
+      <ImageView fx:id="img_pag_buscaCnpj1" fitHeight="24.0" fitWidth="24.0" layoutX="306.0" layoutY="169.0" onMouseClicked="#updateTable" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../image/x.png" />
+         </image>
+      </ImageView>
+      <JFXTextField fx:id="txt_pag_desc" focusColor="#634832" labelFloat="true" layoutX="69.0" layoutY="337.0" prefHeight="36.0" prefWidth="262.0" promptText="Descrição" styleClass="font-text-field" stylesheets="@../css/loginDesing.css" unFocusColor="#dcc2a9" />
+   </children>
+</AnchorPane>

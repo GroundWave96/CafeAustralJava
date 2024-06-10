@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXButton?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.fatec.Controller.FXMLCadastroController">
+   <children>
+      <AnchorPane layoutX="-7.0" prefHeight="603.0" prefWidth="500.0" style="-fx-background-color: #634832;">
+         <children>
+            <ImageView fx:id="ImgLogo" fitHeight="304.0" fitWidth="441.0" layoutX="30.0" layoutY="181.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../image/Logo.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="117.0" layoutY="346.0" text="A Paixão pelo Café em Cada Grão" textFill="#ece0d1">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="frm_cadastro" layoutX="493.0" prefHeight="603.0" prefWidth="517.0" style="-fx-background-color: #ECE0D1;">
+         <children>
+            <JFXTextField fx:id="txt_userCadastro" focusColor="#634832" labelFloat="true" layoutX="49.0" layoutY="169.0" prefHeight="25.0" prefWidth="420.0" promptText="Usuário" styleClass="font-text-field" stylesheets="@../css/loginDesing.css" unFocusColor="#dcc2a9">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXTextField>
+            <Label layoutX="143.0" layoutY="54.0" text="Cadastre-se" textFill="#634832">
+               <font>
+                  <Font name="System Bold" size="40.0" />
+               </font>
+            </Label>
+            <Label layoutX="190.0" layoutY="103.0" text="Crie sua conta" textFill="#634832">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <JFXButton fx:id="btn_cadastrarNovo" buttonType="RAISED" layoutX="42.0" layoutY="444.0" onAction="#cadastrarFornecedor" prefHeight="50.0" prefWidth="420.0" style="-fx-background-color: #dcc2a9; -fx-background-radius: 25;" text="Cadastrar" textFill="#634832">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </JFXButton>
+            <JFXPasswordField fx:id="txt_senhaCadastro" focusColor="#634832" labelFloat="true" layoutX="49.0" layoutY="381.0" prefHeight="25.0" prefWidth="420.0" promptText="Senha" styleClass="font-text-field" stylesheets="@../css/loginDesing.css" unFocusColor="#dcc2a9">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXPasswordField>
+            <Label layoutX="42.0" layoutY="511.0" text="Já tem um conta?" textFill="#634832">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbl_entrarCadastro" layoutX="158.0" layoutY="511.0" onMouseClicked="#entrar" text="Entrar" textFill="#634832">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <JFXTextField fx:id="txt_CNPJ" focusColor="#634832" labelFloat="true" layoutX="49.0" layoutY="220.0" prefHeight="25.0" prefWidth="420.0" promptText="CNPJ" styleClass="font-text-field" stylesheets="@../css/loginDesing.css" unFocusColor="#dcc2a9">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXTextField>
+            <JFXTextField fx:id="txt_telefone" focusColor="#634832" labelFloat="true" layoutX="49.0" layoutY="272.0" prefHeight="25.0" prefWidth="420.0" promptText="Telefone" styleClass="font-text-field" stylesheets="@../css/loginDesing.css" unFocusColor="#dcc2a9">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXTextField>
+            <JFXTextField fx:id="txt_email" focusColor="#634832" labelFloat="true" layoutX="49.0" layoutY="328.0" prefHeight="25.0" prefWidth="420.0" promptText="E-mail" styleClass="font-text-field" stylesheets="@../css/loginDesing.css" unFocusColor="#dcc2a9">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXTextField>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

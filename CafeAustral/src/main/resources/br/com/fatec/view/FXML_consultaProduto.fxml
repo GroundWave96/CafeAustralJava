@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1100.0" style="-fx-background-color: #ECE0D1;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.fatec.Controller.FXMLConsultaProdutoController">
+   <children>
+      <AnchorPane prefHeight="65.0" prefWidth="1100.0" style="-fx-background-color: #634832;" stylesheets="@../css/cadProdDesing.css">
+         <children>
+            <ImageView fitHeight="43.0" fitWidth="200.0" layoutX="14.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../image/Logo.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="428.0" layoutY="18.0" text="Consulta de Produtos" textFill="#ece0d1">
+               <font>
+                  <Font name="Arial" size="25.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <ImageView fitHeight="232.0" fitWidth="305.0" layoutX="32.0" layoutY="208.0" opacity="0.25" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../image/cafeIconeBackground.png" />
+         </image>
+      </ImageView>
+      <AnchorPane layoutX="361.0" layoutY="76.0" prefHeight="513.0" prefWidth="727.0" stylesheets="@../css/admMenuDesign.css">
+         <styleClass>
+            <String fx:value="bg-cler-brown" />
+            <String fx:value="shadow" />
+         </styleClass>
+         <children>
+            <TableView fx:id="consultProd_tableView" layoutX="13.0" layoutY="11.0" prefHeight="490.0" prefWidth="703.0" stylesheets="@../css/cadProdDesing.css">
+              <columns>
+                <TableColumn fx:id="seeProd_col_prodID" prefWidth="32.0" text="ID" />
+                <TableColumn fx:id="seeProd_col_nomeProd" prefWidth="147.0" text="NOME PRODUTO" />
+                  <TableColumn fx:id="seeProd_col_tipoProd" minWidth="4.0" prefWidth="67.0" text="TIPO" />
+                  <TableColumn fx:id="seeProd_col_descProd" prefWidth="148.0" text="DESCRIÇÃO" />
+                  <TableColumn fx:id="seeProd_col_cnpj" prefWidth="142.0" text="CNPJ" />
+                  <TableColumn fx:id="seeProd_col_qtdProd" prefWidth="89.0" text="QUANTIDADE" />
+                  <TableColumn fx:id="seeProd_col_valor" prefWidth="77.0" text="VALOR" />
+              </columns>
+            </TableView>
+         </children>
+      </AnchorPane>
+      <JFXTextField fx:id="txt_consult_nomeProd" focusColor="#634832" labelFloat="true" layoutX="54.0" layoutY="85.0" prefHeight="36.0" prefWidth="262.0" promptText="Nome do Produto" styleClass="font-text-field" stylesheets="@../css/loginDesing.css" unFocusColor="#dcc2a9" />
+      <JFXTextField fx:id="txt_consult_tipoProd" focusColor="#634832" labelFloat="true" layoutX="54.0" layoutY="143.0" prefHeight="36.0" prefWidth="262.0" promptText="Tipo" styleClass="font-text-field" stylesheets="@../css/loginDesing.css" unFocusColor="#dcc2a9" />
+      <JFXTextField fx:id="txt_consult_descProd" focusColor="#634832" labelFloat="true" layoutX="54.0" layoutY="201.0" prefHeight="36.0" prefWidth="262.0" promptText="Descrição" styleClass="font-text-field" stylesheets="@../css/loginDesing.css" unFocusColor="#dcc2a9" />
+      <JFXTextField fx:id="txt_consult_cnpjProd" focusColor="#634832" labelFloat="true" layoutX="54.0" layoutY="260.0" prefHeight="36.0" prefWidth="191.0" promptText="CNPJ" styleClass="font-text-field" stylesheets="@../css/loginDesing.css" unFocusColor="#dcc2a9" />
+      <JFXTextField fx:id="txt_consult_qtdProd" focusColor="#634832" labelFloat="true" layoutX="54.0" layoutY="318.0" prefHeight="36.0" prefWidth="262.0" promptText="Quantidade" styleClass="font-text-field" stylesheets="@../css/loginDesing.css" unFocusColor="#dcc2a9" />
+      <JFXButton fx:id="btn_menuAdmBack" buttonType="RAISED" layoutX="13.0" layoutY="553.0" onAction="#menuAdmBack" prefHeight="36.0" prefWidth="70.0" style="-fx-background-color: #dcc2a9;" text="Voltar" textFill="#634832">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="btn_editConsultProd" buttonType="RAISED" layoutX="201.0" layoutY="437.0" onAction="#updateProduct" prefHeight="40.0" prefWidth="110.0" style="-fx-background-color: #dcc2a9; -fx-background-radius: 25;" text="Editar" textFill="#634832">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="btn_clearConsultProd" buttonType="RAISED" layoutX="64.0" layoutY="437.0" onAction="#clearFields" prefHeight="40.0" prefWidth="110.0" style="-fx-background-color: #dcc2a9; -fx-background-radius: 25;" text="Limpar" textFill="#634832">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="btn_delConsultProd" buttonType="RAISED" layoutX="131.0" layoutY="488.0" onAction="#deleteProduct" prefHeight="40.0" prefWidth="110.0" style="-fx-background-color: #dcc2a9; -fx-background-radius: 25;" text="Excluir" textFill="#634832">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </JFXButton>
+      <JFXTextField fx:id="txt_consult_valProd" focusColor="#634832" labelFloat="true" layoutX="55.0" layoutY="382.0" prefHeight="36.0" prefWidth="262.0" promptText="Valor" styleClass="font-text-field" stylesheets="@../css/loginDesing.css" unFocusColor="#dcc2a9" />
+      <ImageView fx:id="img_consultCnpj" fitHeight="30.0" fitWidth="24.0" layoutX="254.0" layoutY="266.0" onMouseClicked="#updateTableCNPJ" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../image/lupa.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="img_consultCnpj1" fitHeight="30.0" fitWidth="24.0" layoutX="290.0" layoutY="266.0" onMouseClicked="#updateTable" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../image/x.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

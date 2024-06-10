@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.fatec.Controller.FXMLCadastroFornController">
+   <children>
+      <AnchorPane layoutX="-7.0" prefHeight="603.0" prefWidth="500.0" style="-fx-background-color: #634832;">
+         <children>
+            <ImageView fx:id="ImgLogo" fitHeight="304.0" fitWidth="441.0" layoutX="30.0" layoutY="181.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../image/Logo.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="117.0" layoutY="346.0" text="A Paixão pelo Café em Cada Grão" textFill="#ece0d1">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <JFXButton fx:id="btn_BackFornAdm" buttonType="RAISED" layoutX="14.0" layoutY="544.0" onAction="#forntoAdm" prefHeight="45.0" prefWidth="67.0" style="-fx-background-color: #dcc2a9;" text="Voltar" textFill="#634832">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </JFXButton>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="frm_cadastroadm" layoutX="493.0" prefHeight="603.0" prefWidth="517.0" style="-fx-background-color: #ECE0D1;">
+         <children>
+            <JFXTextField fx:id="txt_userCadForn" focusColor="#634832" labelFloat="true" layoutX="46.0" layoutY="155.0" prefHeight="25.0" prefWidth="420.0" promptText="Usuário" unFocusColor="#dcc2a9">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXTextField>
+            <Label layoutX="163.0" layoutY="54.0" text="Cadastro" textFill="#634832">
+               <font>
+                  <Font name="System Bold" size="40.0" />
+               </font>
+            </Label>
+            <Label layoutX="147.0" layoutY="97.0" text="Cadastre um Fornecedor" textFill="#634832">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <JFXButton fx:id="btn_cadFornAdm" buttonType="RAISED" layoutX="46.0" layoutY="426.0" onAction="#cadastrarFornecedor" prefHeight="50.0" prefWidth="420.0" style="-fx-background-color: #dcc2a9;" text="Cadastrar" textFill="#634832">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </JFXButton>
+            <JFXPasswordField fx:id="txt_senhaCadForn" focusColor="#634832" labelFloat="true" layoutX="46.0" layoutY="367.0" prefHeight="25.0" prefWidth="420.0" promptText="Senha" unFocusColor="#dcc2a9">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXPasswordField>
+            <JFXTextField fx:id="txt_cnpjCadForn" focusColor="#634832" labelFloat="true" layoutX="46.0" layoutY="206.0" prefHeight="30.0" prefWidth="396.0" promptText="CNPJ" unFocusColor="#dcc2a9">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXTextField>
+            <JFXTextField fx:id="txt_telCadForn" focusColor="#634832" labelFloat="true" layoutX="46.0" layoutY="258.0" prefHeight="25.0" prefWidth="420.0" promptText="Telefone" unFocusColor="#dcc2a9">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXTextField>
+            <JFXTextField fx:id="txt_emailCadForn" focusColor="#634832" labelFloat="true" layoutX="46.0" layoutY="314.0" prefHeight="25.0" prefWidth="420.0" promptText="E-mail" unFocusColor="#dcc2a9">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXTextField>
+            <JFXButton fx:id="btn_editFornAdm" buttonType="RAISED" layoutX="46.0" layoutY="512.0" onAction="#atualizarFornecedor" prefHeight="45.0" prefWidth="200.0" style="-fx-background-color: #dcc2a9;" text="Editar" textFill="#634832">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </JFXButton>
+            <JFXButton fx:id="btn_delFornAdm" buttonType="RAISED" layoutX="263.0" layoutY="512.0" onAction="#excluirFornecedor" prefHeight="45.0" prefWidth="200.0" style="-fx-background-color: #dcc2a9;" text="Excluir" textFill="#634832">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </JFXButton>
+            <ImageView fx:id="img_cnpjCadConsult" fitHeight="21.0" fitWidth="24.0" layoutX="442.0" layoutY="211.0" onMouseClicked="#buscarFornecedorPorCNPJ" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../image/lupa.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

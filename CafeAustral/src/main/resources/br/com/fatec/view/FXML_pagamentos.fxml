@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1100.0" style="-fx-background-color: #ece0d1;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.fatec.Controller.FXMLPagamentosController">
+   <children>
+      <AnchorPane prefHeight="65.0" prefWidth="1100.0" style="-fx-background-color: #634832;">
+         <children>
+            <ImageView fitHeight="45.0" fitWidth="201.0" layoutX="14.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../image/Logo.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="480.0" layoutY="18.0" text="Pagamentos" textFill="#ece0d1">
+               <font>
+                  <Font name="Arial" size="25.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="33.0" layoutY="141.0" prefHeight="397.0" prefWidth="1034.0" stylesheets="@../css/admMenuDesign.css">
+         <styleClass>
+            <String fx:value="shadow" />
+            <String fx:value="bg-cler-brown" />
+         </styleClass>
+         <children>
+            <TableView fx:id="consutlPag_tabelview" layoutX="13.0" layoutY="11.0" prefHeight="375.0" prefWidth="1008.0">
+              <columns>
+                <TableColumn fx:id="consult_pag_id" prefWidth="52.0" text="ID" />
+                <TableColumn fx:id="consult_pag_estado" prefWidth="235.0" text="ESTADO" />
+                  <TableColumn fx:id="consult_pag_cnpj" prefWidth="289.0" text="CNPJ" />
+                  <TableColumn fx:id="consult_pag_val" prefWidth="142.0" text="VALOR" />
+                  <TableColumn fx:id="consult_pag_situacao" prefWidth="289.0" text="SITUAÇÃO" />
+              </columns>
+               <stylesheets>
+                  <URL value="@../css/admMenuDesign.css" />
+                  <URL value="@../css/cadProdDesing.css" />
+               </stylesheets>
+            </TableView>
+         </children></AnchorPane>
+      <JFXTextField fx:id="consult_pag_buscatb" focusColor="#634832" labelFloat="true" layoutX="33.0" layoutY="85.0" prefHeight="36.0" prefWidth="324.0" promptText="Buscar" styleClass="font-text-field" stylesheets="@../css/loginDesing.css" unFocusColor="#dcc2a9" />
+      <JFXButton fx:id="btn_menuFornecBack" buttonType="RAISED" layoutX="14.0" layoutY="550.0" onAction="#menuFornecBack" prefHeight="36.0" prefWidth="70.0" style="-fx-background-color: #dcc2a9;" text="Voltar" textFill="#634832">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </JFXButton>
+   </children>
+</AnchorPane>
