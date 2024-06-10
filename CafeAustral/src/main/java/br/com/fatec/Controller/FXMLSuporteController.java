@@ -25,6 +25,28 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
+import java.sql.SQLException;
+
+import br.com.fatec.DATABASE.DataBase;
+
+import java.sql.SQLException;
+
+import java.sql.SQLException;
+
+import java.sql.SQLException;
+
+import javafx.scene.control.Alert;
+
+import javafx.scene.control.Alert;
+
+import javafx.fxml.FXML;
+
+import javafx.scene.control.TableColumn;
+
+import javafx.fxml.FXML;
+
+import javafx.scene.control.TableColumn;
+
 /**
  *
  * @author vitor
@@ -63,6 +85,11 @@ public class FXMLSuporteController {
         public String getDescricao() {
             return descricao;
         }
+
+        public String getSituacao() {
+            return situacao;
+        }
+
     }
 
     @FXML
@@ -100,7 +127,7 @@ public class FXMLSuporteController {
     @FXML
     public void initialize() {
         updateTable();
-
+        txt_sup_cnpj.setText(getData.cnpj);
         sup_tableView.setOnMouseClicked(event -> selectRow());
     }
 
@@ -120,6 +147,7 @@ public class FXMLSuporteController {
             txt_sup_sobre.setText(selectedSuporte.getSobre());
             txt_sup_desc.setText(selectedSuporte.getDescricao());
             txt_sup_id.setText(Integer.toString(selectedSuporte.getId()));
+
         }
     }
 
@@ -128,12 +156,13 @@ public class FXMLSuporteController {
 
         ObservableList<Suporte> supList = FXCollections.observableArrayList();
 
-        String query = "SELECT * FROM suporte";
+        String query = "SELECT * FROM suporte WHERE CNPJ = ?";
 
         connect = DataBase.connectDb();
 
         try {
             prepare = connect.prepareStatement(query);
+            prepare.setString(1, getData.cnpj);
             result = prepare.executeQuery();
 
             while (result.next()) {
@@ -162,9 +191,108 @@ public class FXMLSuporteController {
         }
     }
 
+    public void cadastrarSuporte() {
+
+        if (txt_sup_sobre.getText().isEmpty()
+                || txt_sup_desc.getText().isEmpty()) {
+
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Message");
+            alert.setHeaderText(null);
+            alert.setContentText("Preencha todos os campos!");
+            alert.showAndWait();
+            return;
+        }
+
+        String insertQuery = "INSERT INTO suporte (CNPJ, Sobre, Descricao, Situacao) VALUES (?, ?, ?, ?)";
+
+        try {
+            connect = DataBase.connectDb();
+            prepare = connect.prepareStatement(insertQuery);
+            prepare.setString(1, txt_sup_cnpj.getText());
+            prepare.setString(2, txt_sup_sobre.getText());
+            prepare.setString(3, txt_sup_desc.getText());
+            prepare.setString(4, "Aguardando");
+
+            int rowsInserted = prepare.executeUpdate();
+            if (rowsInserted > 0) {
+                showAlert(Alert.AlertType.INFORMATION, "Information Message", "Suporte cadastrado com sucesso!");
+                updateTable();
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closeConnection();
+        }
+    }
+
+    public void deleteSuporte() {
+        String deleteQuery = "DELETE FROM suporte WHERE ID = ?";
+
+        try {
+            connect = DataBase.connectDb();
+            prepare = connect.prepareStatement(deleteQuery);
+            prepare.setString(1, txt_sup_id.getText());
+
+            int rowsDeleted = prepare.executeUpdate();
+            if (rowsDeleted > 0) {
+                showAlert(Alert.AlertType.INFORMATION, "Information Message", "Suporte deletado com sucesso!");
+                updateTable();
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (prepare != null) {
+                    prepare.close();
+                }
+                if (connect != null) {
+                    connect.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void updateSuporte() {
+        String updateQuery = "UPDATE suporte SET Sobre = ?, Descricao = ? WHERE ID = ?";
+
+        try {
+            connect = DataBase.connectDb(); // Obtenha a conexão com o banco de dados
+            prepare = connect.prepareStatement(updateQuery);
+
+            // Defina os valores dos campos de texto nos parâmetros da consulta
+            prepare.setString(1, txt_sup_sobre.getText());
+            prepare.setString(2, txt_sup_desc.getText());
+            prepare.setString(3, txt_sup_id.getText());
+
+            int rowsUpdated = prepare.executeUpdate();
+            if (rowsUpdated > 0) {
+                showAlert(Alert.AlertType.INFORMATION, "Information Message", "Suporte atualizado com sucesso!");
+                updateTable();
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (prepare != null) {
+                    prepare.close();
+                }
+                if (connect != null) {
+                    connect.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
     @FXML
     public void clearFields() {
-        txt_sup_cnpj.clear();
         txt_sup_sobre.clear();
         txt_sup_desc.clear();
         txt_sup_id.clear();

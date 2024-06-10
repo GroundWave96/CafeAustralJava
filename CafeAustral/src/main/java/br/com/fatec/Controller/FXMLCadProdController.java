@@ -82,7 +82,7 @@ public class FXMLCadProdController {
 
     @FXML
     private JFXButton btn_menuFornBack;
-    
+
     @FXML
     private TextField txt_cad_ID;
 
@@ -131,18 +131,17 @@ public class FXMLCadProdController {
     private Connection connect;
     private PreparedStatement prepare;
     private ResultSet result;
-    
-    
+
     private ObservableList<ProdutoModel> produtoList;
 
     @FXML
     public void initialize() {
         txt_cad_cnpjProd.setText(getData.cnpj);  // Preenche automaticamente o campo com o CNPJ do fornecedor logado
-        
+
         updateTable();
 
         cadProd_tableView.setOnMouseClicked(event -> selectRow());
-        
+
         System.out.println(getData.cnpj);
 
     }
@@ -154,7 +153,7 @@ public class FXMLCadProdController {
         alert.setContentText(content);
         alert.showAndWait();
     }
-    
+
     @FXML
     public void selectRow() {
         Produto selectedProduto = cadProd_tableView.getSelectionModel().getSelectedItem();
@@ -168,9 +167,22 @@ public class FXMLCadProdController {
             txt_cad_ID.setText(Integer.toString(selectedProduto.getId()));
         }
     }
-    
+
     public void cadastrarProduto() {
-    String insertQuery = "INSERT INTO produtos (CNPJ, NomeDoProduto, Tipo, Descricao, Valor, Quantidade) VALUES (?, ?, ?, ?, ?, ?)";
+
+        if (txt_cad_nomeProd.getText().isEmpty() || txt_cad_tipoProd.getText().isEmpty()
+                || txt_cad_descProd.getText().isEmpty() || txt_cad_valProd.getText().isEmpty()
+                || txt_cad_qtdProd.getText().isEmpty()) {
+
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Message");
+            alert.setHeaderText(null);
+            alert.setContentText("Preencha todos os campos!");
+            alert.showAndWait();
+            return;
+        }
+
+        String insertQuery = "INSERT INTO produtos (CNPJ, NomeDoProduto, Tipo, Descricao, Valor, Quantidade) VALUES (?, ?, ?, ?, ?, ?)";
 
         try {
             connect = DataBase.connectDb();
@@ -194,8 +206,7 @@ public class FXMLCadProdController {
             closeConnection();
         }
     }
-    
-  
+
     public void updateTable() {
         cadProd_tableView.setItems(FXCollections.observableArrayList());
 
@@ -251,7 +262,7 @@ public class FXMLCadProdController {
             }
         }
     }
-    
+
     public void updateProduct() {
         String updateQuery = "UPDATE produtos SET NomeDoProduto = ?, Tipo = ?, Descricao = ?, Valor = ?, Quantidade = ? WHERE ID = ?";
 
@@ -288,7 +299,7 @@ public class FXMLCadProdController {
             }
         }
     }
-    
+
     public void deleteProduct() {
         String deleteQuery = "DELETE FROM produtos WHERE ID = ?";
 
@@ -317,8 +328,8 @@ public class FXMLCadProdController {
                 e.printStackTrace();
             }
         }
-    }    
-    
+    }
+
     @FXML
     public void clearFields() {
         txt_cad_nomeProd.clear();

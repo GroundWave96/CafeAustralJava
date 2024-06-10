@@ -21,7 +21,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
- * 
+ *
  * Autor: Vitor
  */
 public class FXMLCadastroController {
@@ -107,11 +107,42 @@ public class FXMLCadastroController {
             return;
         }
 
-        // Inserir dados na tabela fornecedores
-        String sql = "INSERT INTO fornecedores (Nome, CNPJ, Telefone, Email, Senha) VALUES (?, ?, ?, ?, ?)";
+        // Conectar ao banco de dados
         connect = DataBase.connectDb();
 
         try {
+            // Verifica se o CNPJ já existe
+            String checkCNPJ = "SELECT * FROM fornecedores WHERE CNPJ = ?";
+            prepare = connect.prepareStatement(checkCNPJ);
+            prepare.setString(1, txt_CNPJ.getText());
+            result = prepare.executeQuery();
+
+            if (result.next()) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error Message");
+                alert.setHeaderText(null);
+                alert.setContentText("CNPJ já cadastrado!");
+                alert.showAndWait();
+                return;
+            }
+
+            // Verifica se o Email já existe
+            String checkEmail = "SELECT * FROM fornecedores WHERE Email = ?";
+            prepare = connect.prepareStatement(checkEmail);
+            prepare.setString(1, txt_email.getText());
+            result = prepare.executeQuery();
+
+            if (result.next()) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error Message");
+                alert.setHeaderText(null);
+                alert.setContentText("Email já cadastrado!");
+                alert.showAndWait();
+                return;
+            }
+
+            // Inserir dados na tabela fornecedores
+            String sql = "INSERT INTO fornecedores (Nome, CNPJ, Telefone, Email, Senha) VALUES (?, ?, ?, ?, ?)";
             prepare = connect.prepareStatement(sql);
             prepare.setString(1, txt_userCadastro.getText());
             prepare.setString(2, txt_CNPJ.getText());
@@ -158,4 +189,5 @@ public class FXMLCadastroController {
             alert.showAndWait();
         }
     }
+
 }
