@@ -29,6 +29,57 @@ import javafx.stage.Stage;
  */
 public class FXMLCadProdController {
 
+    public class Produto {
+
+        private int id;
+        private String cnpj;
+        private String nomeDoProduto;
+        private String tipo;
+        private String descricao;
+        private double valor;
+        private int quantidade;
+
+        // Construtor
+        public Produto(int id, String cnpj, String nomeDoProduto, String tipo, String descricao, double valor, int quantidade) {
+            this.id = id;
+            this.cnpj = cnpj;
+            this.nomeDoProduto = nomeDoProduto;
+            this.tipo = tipo;
+            this.descricao = descricao;
+            this.valor = valor;
+            this.quantidade = quantidade;
+        }
+
+        // Getters
+        public int getId() {
+            return id;
+        }
+
+        public String getCnpj() {
+            return cnpj;
+        }
+
+        public String getNomeDoProduto() {
+            return nomeDoProduto;
+        }
+
+        public String getTipo() {
+            return tipo;
+        }
+
+        public String getDescricao() {
+            return descricao;
+        }
+
+        public double getValor() {
+            return valor;
+        }
+
+        public int getQuantidade() {
+            return quantidade;
+        }
+    }
+
     @FXML
     private JFXButton btn_menuFornBack;
 
@@ -45,160 +96,52 @@ public class FXMLCadProdController {
     private TextField txt_cad_descProd;
 
     @FXML
-    private TextField txt_cad_valorProd;
+    private TextField txt_cad_valProd;
 
     @FXML
     private TextField txt_cad_qtdProd;
 
     @FXML
-    private TableView<ProdutoModel> cadProd_tableView;
+    private TableView<Produto> cadProd_tableView;
 
     @FXML
-    private TableColumn<ProdutoModel, Integer> addProd_col_prodID;
+    private TableColumn<Produto, Integer> addProd_col_prodID;
 
     @FXML
-    private TableColumn<ProdutoModel, String> addProd_col_cnpj;
+    private TableColumn<Produto, String> addProd_col_cnpj;
 
     @FXML
-    private TableColumn<ProdutoModel, String> addProd_col_nomeProd;
+    private TableColumn<Produto, String> addProd_col_nomeProd;
 
     @FXML
-    private TableColumn<ProdutoModel, String> addProd_col_tipoProd;
+    private TableColumn<Produto, String> addProd_col_tipoProd;
 
     @FXML
-    private TableColumn<ProdutoModel, String> addProd_col_descProd;
+    private TableColumn<Produto, String> addProd_col_descProd;
 
     @FXML
-    private TableColumn<ProdutoModel, Double> addProd_col_valor;
+    private TableColumn<Produto, Double> addProd_col_valor;
 
     @FXML
-    private TableColumn<ProdutoModel, Integer> addProd_col_qtdProd;
+    private TableColumn<Produto, Integer> addProd_col_qtdProd;
 
     private Connection connect;
     private PreparedStatement prepare;
     private ResultSet result;
-
+    
+    
     private ObservableList<ProdutoModel> produtoList;
 
     @FXML
     public void initialize() {
         txt_cad_cnpjProd.setText(getData.cnpj);  // Preenche automaticamente o campo com o CNPJ do fornecedor logado
+        
+        updateTable();
 
-        initTable();
-        loadTableData();
-    }
+        cadProd_tableView.setOnMouseClicked(event -> selectRow());
+        
+        System.out.println(getData.cnpj);
 
-    @FXML
-    private void buscarCnpj() {
-        txt_cad_cnpjProd.setText(getData.cnpj);
-    }
-
-    @FXML
-    private void cadastrarProduto() {
-        String sql = "INSERT INTO produtos (CNPJ, NomeDoProduto, Tipo, Descricao, Valor, Quantidade) VALUES (?, ?, ?, ?, ?, ?)";
-
-        connect = DataBase.connectDb();
-
-        try {
-            prepare = connect.prepareStatement(sql);
-            prepare.setString(1, txt_cad_cnpjProd.getText());
-            prepare.setString(2, txt_cad_nomeProd.getText());
-            prepare.setString(3, txt_cad_tipoProd.getText());
-            prepare.setString(4, txt_cad_descProd.getText());
-            prepare.setString(5, txt_cad_valorProd.getText());
-            prepare.setString(6, txt_cad_qtdProd.getText());
-
-            if (txt_cad_cnpjProd.getText().isEmpty() || txt_cad_nomeProd.getText().isEmpty()
-                    || txt_cad_tipoProd.getText().isEmpty() || txt_cad_descProd.getText().isEmpty()
-                    || txt_cad_valorProd.getText().isEmpty() || txt_cad_qtdProd.getText().isEmpty()) {
-                showAlert(Alert.AlertType.ERROR, "Error Message", "Por favor, preencha todos os campos!");
-            } else {
-                prepare.executeUpdate();
-                showAlert(Alert.AlertType.INFORMATION, "Information Message", "Produto cadastrado com sucesso!");
-                clearFields();
-                loadTableData(); // Atualiza a tabela após cadastrar o produto
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            closeConnection();
-        }
-    }
-
-    @FXML
-    private void editarProduto() {
-        String sql = "UPDATE produtos SET NomeDoProduto = ?, Tipo = ?, Descricao = ?, Valor = ?, Quantidade = ? WHERE CNPJ = ? AND NomeDoProduto = ?";
-
-        connect = DataBase.connectDb();
-
-        try {
-            prepare = connect.prepareStatement(sql);
-            prepare.setString(1, txt_cad_nomeProd.getText());
-            prepare.setString(2, txt_cad_tipoProd.getText());
-            prepare.setString(3, txt_cad_descProd.getText());
-            prepare.setString(4, txt_cad_valorProd.getText());
-            prepare.setString(5, txt_cad_qtdProd.getText());
-            prepare.setString(6, txt_cad_cnpjProd.getText());
-            prepare.setString(7, txt_cad_nomeProd.getText());
-
-            if (txt_cad_nomeProd.getText().isEmpty() || txt_cad_tipoProd.getText().isEmpty()
-                    || txt_cad_descProd.getText().isEmpty() || txt_cad_valorProd.getText().isEmpty()
-                    || txt_cad_qtdProd.getText().isEmpty()) {
-                showAlert(Alert.AlertType.ERROR, "Error Message", "Por favor, preencha todos os campos!");
-            } else {
-                prepare.executeUpdate();
-                showAlert(Alert.AlertType.INFORMATION, "Information Message", "Produto atualizado com sucesso!");
-                clearFields();
-                loadTableData(); // Atualiza a tabela após editar o produto
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            closeConnection();
-        }
-    }
-
-    @FXML
-    private void deletarProduto() {
-        String sql = "DELETE FROM produtos WHERE CNPJ = ? AND NomeDoProduto = ?";
-
-        connect = DataBase.connectDb();
-
-        try {
-            prepare = connect.prepareStatement(sql);
-            prepare.setString(1, txt_cad_cnpjProd.getText());
-            prepare.setString(2, txt_cad_nomeProd.getText());
-
-            if (txt_cad_nomeProd.getText().isEmpty()) {
-                showAlert(Alert.AlertType.ERROR, "Error Message", "Por favor, insira o nome do produto!");
-            } else {
-                prepare.executeUpdate();
-                showAlert(Alert.AlertType.INFORMATION, "Information Message", "Produto deletado com sucesso!");
-                clearFields();
-                loadTableData(); // Atualiza a tabela após deletar o produto
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            closeConnection();
-        }
-    }
-
-    @FXML
-    private void limparCampos() {
-        clearFields();
-    }
-
-    private void clearFields() {
-        txt_cad_cnpjProd.clear();
-        txt_cad_nomeProd.clear();
-        txt_cad_tipoProd.clear();
-        txt_cad_descProd.clear();
-        txt_cad_valorProd.clear();
-        txt_cad_qtdProd.clear();
     }
 
     private void showAlert(Alert.AlertType alertType, String title, String content) {
@@ -207,6 +150,151 @@ public class FXMLCadProdController {
         alert.setHeaderText(null);
         alert.setContentText(content);
         alert.showAndWait();
+    }
+    
+    @FXML
+    public void selectRow() {
+        Produto selectedProduto = cadProd_tableView.getSelectionModel().getSelectedItem();
+        if (selectedProduto != null) {
+            txt_cad_cnpjProd.setText(selectedProduto.getCnpj());
+            txt_cad_nomeProd.setText(selectedProduto.getNomeDoProduto());
+            txt_cad_tipoProd.setText(selectedProduto.getTipo());
+            txt_cad_descProd.setText(selectedProduto.getDescricao());
+            txt_cad_valProd.setText(Double.toString(selectedProduto.getValor()));
+            txt_cad_qtdProd.setText(Integer.toString(selectedProduto.getQuantidade()));
+        }
+    }
+    
+    public void updateTable() {
+        cadProd_tableView.setItems(FXCollections.observableArrayList());
+
+        ObservableList<Produto> productList = FXCollections.observableArrayList();
+
+        String query = "SELECT * FROM produtos WHERE CNPJ = ?";
+
+        connect = DataBase.connectDb();
+
+        try {
+            prepare = connect.prepareStatement(query);
+            prepare.setString(1, getData.cnpj);
+            result = prepare.executeQuery();
+
+            while (result.next()) {
+                int id = result.getInt("ID");
+                String cnpj = result.getString("CNPJ");
+                String nomeDoProduto = result.getString("NomeDoProduto");
+                String tipo = result.getString("Tipo");
+                String descricao = result.getString("Descricao");
+                double valor = result.getDouble("Valor");
+                int quantidade = result.getInt("Quantidade");
+
+                Produto produto = new Produto(id, cnpj, nomeDoProduto, tipo, descricao, valor, quantidade);
+                productList.add(produto);
+            }
+
+            cadProd_tableView.setItems(productList);
+
+            addProd_col_prodID.setCellValueFactory(new PropertyValueFactory<>("id"));
+            addProd_col_cnpj.setCellValueFactory(new PropertyValueFactory<>("cnpj"));
+            addProd_col_nomeProd.setCellValueFactory(new PropertyValueFactory<>("nomeDoProduto"));
+            addProd_col_tipoProd.setCellValueFactory(new PropertyValueFactory<>("tipo"));
+            addProd_col_descProd.setCellValueFactory(new PropertyValueFactory<>("descricao"));
+            addProd_col_valor.setCellValueFactory(new PropertyValueFactory<>("valor"));
+            addProd_col_qtdProd.setCellValueFactory(new PropertyValueFactory<>("quantidade"));
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (result != null) {
+                    result.close();
+                }
+                if (prepare != null) {
+                    prepare.close();
+                }
+                if (connect != null) {
+                    connect.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    
+    public void updateProduct() {
+        String updateQuery = "UPDATE produtos SET NomeDoProduto = ?, Tipo = ?, Descricao = ?, Valor = ?, Quantidade = ? WHERE CNPJ = ?";
+
+        try {
+            connect = DataBase.connectDb(); // Obtenha a conexão com o banco de dados
+            prepare = connect.prepareStatement(updateQuery);
+
+            // Defina os valores dos campos de texto nos parâmetros da consulta
+            prepare.setString(1, txt_cad_nomeProd.getText());
+            prepare.setString(2, txt_cad_tipoProd.getText());
+            prepare.setString(3, txt_cad_descProd.getText());
+            prepare.setDouble(4, Double.parseDouble(txt_cad_valProd.getText()));
+            prepare.setInt(5, Integer.parseInt(txt_cad_qtdProd.getText()));
+            prepare.setString(6, txt_cad_cnpjProd.getText());
+
+            int rowsUpdated = prepare.executeUpdate();
+            if (rowsUpdated > 0) {
+                showAlert(Alert.AlertType.INFORMATION, "Information Message", "Produto atualizado com sucesso!");
+                updateTable();
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (prepare != null) {
+                    prepare.close();
+                }
+                if (connect != null) {
+                    connect.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    
+    public void deleteProduct() {
+        String deleteQuery = "DELETE FROM produtos WHERE CNPJ = ?";
+
+        try {
+            connect = DataBase.connectDb();
+            prepare = connect.prepareStatement(deleteQuery);
+            prepare.setString(1, txt_cad_cnpjProd.getText());
+
+            int rowsDeleted = prepare.executeUpdate();
+            if (rowsDeleted > 0) {
+                showAlert(Alert.AlertType.INFORMATION, "Information Message", "Produto deletado com sucesso!");
+                updateTable();
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (prepare != null) {
+                    prepare.close();
+                }
+                if (connect != null) {
+                    connect.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }    
+    
+    @FXML
+    public void clearFields() {
+        txt_cad_nomeProd.clear();
+        txt_cad_tipoProd.clear();
+        txt_cad_descProd.clear();
+        txt_cad_valProd.clear();
+        txt_cad_qtdProd.clear();
     }
 
     private void closeConnection() {
@@ -232,50 +320,6 @@ public class FXMLCadProdController {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
-    }
-
-    private void initTable() {
-        addProd_col_prodID.setCellValueFactory(new PropertyValueFactory<>("id"));
-        addProd_col_cnpj.setCellValueFactory(new PropertyValueFactory<>("cnpj"));
-        addProd_col_nomeProd.setCellValueFactory(new PropertyValueFactory<>("nome"));
-        addProd_col_tipoProd.setCellValueFactory(new PropertyValueFactory<>("tipo"));
-        addProd_col_descProd.setCellValueFactory(new PropertyValueFactory<>("descricao"));
-        addProd_col_valor.setCellValueFactory(new PropertyValueFactory<>("valor"));
-        addProd_col_qtdProd.setCellValueFactory(new PropertyValueFactory<>("quantidade"));
-
-        produtoList = FXCollections.observableArrayList();
-        cadProd_tableView.setItems(produtoList);
-    }
-
-    private void loadTableData() {
-        produtoList.clear();
-        String sql = "SELECT * FROM produtos WHERE CNPJ = ?";
-
-        connect = DataBase.connectDb();
-
-        try {
-            prepare = connect.prepareStatement(sql);
-            prepare.setString(1, getData.cnpj);
-            result = prepare.executeQuery();
-
-            while (result.next()) {
-                ProdutoModel produto = new ProdutoModel(
-                        result.getInt("ID"),
-                        result.getString("CNPJ"),
-                        result.getString("NomeDoProduto"),
-                        result.getString("Tipo"),
-                        result.getString("Descricao"),
-                        result.getDouble("Valor"),
-                        result.getInt("Quantidade")
-                );
-                produtoList.add(produto);
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            closeConnection();
-        }
     }
 
 }
