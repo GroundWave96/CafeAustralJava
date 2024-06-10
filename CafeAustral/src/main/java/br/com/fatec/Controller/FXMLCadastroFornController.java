@@ -337,9 +337,41 @@ public class FXMLCadastroFornController {
         // Verifica se o CNPJ já está cadastrado
         String cnpj = txt_cnpjCadForn.getText();
         String checkIfExistsSql = "SELECT * FROM fornecedores WHERE CNPJ = ?";
+        
         connect = DataBase.connectDb();
 
         try {
+            
+            // Verifica se o CNPJ já existe
+            String checkCNPJ = "SELECT * FROM fornecedores WHERE CNPJ = ?";
+            prepare = connect.prepareStatement(checkCNPJ);
+            prepare.setString(1, txt_cnpjCadForn.getText());
+            result = prepare.executeQuery();
+
+            if (result.next()) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error Message");
+                alert.setHeaderText(null);
+                alert.setContentText("CNPJ já cadastrado!");
+                alert.showAndWait();
+                return;
+            }
+
+            // Verifica se o Email já existe
+            String checkEmail = "SELECT * FROM fornecedores WHERE Email = ?";
+            prepare = connect.prepareStatement(checkEmail);
+            prepare.setString(1, txt_emailCadForn.getText());
+            result = prepare.executeQuery();
+
+            if (result.next()) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error Message");
+                alert.setHeaderText(null);
+                alert.setContentText("Email já cadastrado!");
+                alert.showAndWait();
+                return;
+            }
+            
             prepare = connect.prepareStatement(checkIfExistsSql);
             prepare.setString(1, cnpj);
             result = prepare.executeQuery();
