@@ -4,6 +4,7 @@
  */
 package br.com.fatec.Controller;
 
+import static br.com.fatec.Controller.getData.cnpj;
 import br.com.fatec.DATABASE.DataBase;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
@@ -13,6 +14,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -187,6 +189,27 @@ public class FXMLPagamentosAdmController {
     }
     
     public void updatePag() {
+        String estadoPagamento = cmb_pag_estado.getValue();
+        String cnpj = txt_pag_cnpj.getText();
+        String valorText = txt_pag_val.getText();
+        String situacao = cmb_pag_situacao.getValue();
+
+        // Verifica se algum campo está vazio
+        if (estadoPagamento == null || cnpj.isEmpty() || valorText.isEmpty() || situacao == null) {
+            showAlert(Alert.AlertType.ERROR, "Erro", "Preencha todos os campos antes de cadastrar o pagamento.");
+            return;
+        }
+
+        // Trata a exceção de conversão para double
+        double valor;
+        try {
+            valor = Double.parseDouble(valorText);
+        } catch (NumberFormatException e) {
+            showAlert(Alert.AlertType.ERROR, "Erro", "O valor deve ser numérico.");
+            return;
+        }         
+        
+               
         String updateQuery = "UPDATE pagamentos SET EstadoDoPagamento = ?, CNPJ = ?, Valor = ?, Situacao = ? WHERE ID = ?";
 
         try {
@@ -222,6 +245,156 @@ public class FXMLPagamentosAdmController {
         }
     }
 
+
+    public void cadastrarPagamento() {
+        String estadoPagamento = cmb_pag_estado.getValue();
+        String cnpj = txt_pag_cnpj.getText();
+        String valorText = txt_pag_val.getText();
+        String situacao = cmb_pag_situacao.getValue();
+
+        // Verifica se algum campo está vazio
+        if (estadoPagamento == null || cnpj.isEmpty() || valorText.isEmpty() || situacao == null) {
+            showAlert(Alert.AlertType.ERROR, "Erro", "Preencha todos os campos antes de cadastrar o pagamento.");
+            return;
+        }
+
+        // Trata a exceção de conversão para double
+        double valor;
+        try {
+            valor = Double.parseDouble(valorText);
+        } catch (NumberFormatException e) {
+            showAlert(Alert.AlertType.ERROR, "Erro", "O valor deve ser numérico.");
+            return;
+        }            
+        
+        
+        String insertQuery = "INSERT INTO pagamentos (EstadoDoPagamento, CNPJ, Valor, Situacao) VALUES (?, ?, ?, ?)";
+
+        try {
+            connect = DataBase.connectDb();
+            prepare = connect.prepareStatement(insertQuery);
+
+            prepare.setString(1, cmb_pag_estado.getValue());
+            prepare.setString(2, txt_pag_cnpj.getText());
+            prepare.setDouble(3, Double.parseDouble(txt_pag_val.getText()));
+            prepare.setString(4, cmb_pag_situacao.getValue());
+
+            int rowsInserted = prepare.executeUpdate();
+            if (rowsInserted > 0) {
+                showAlert(Alert.AlertType.INFORMATION, "Information Message", "Pagamento cadastrado com sucesso!");
+                updateTable();
+            }
+
+            } catch (SQLException e) {
+                   if (e instanceof SQLIntegrityConstraintViolationException) {
+                       showAlert(Alert.AlertType.ERROR, "Erro", "Não foi possível cadastrar o pagamento. Verifique se o CNPJ existe.");
+                   } else {
+                       e.printStackTrace();
+                   }
+               } finally {
+                   try {
+                       if (prepare != null) {
+                           prepare.close();
+                       }
+                       if (connect != null) {
+                           connect.close();
+                       }
+                   } catch (SQLException e) {
+                       e.printStackTrace();
+                   }
+               }
+           }
+
+    public void deletarPagamento() {
+        
+        String estadoPagamento = cmb_pag_estado.getValue();
+        String cnpj = txt_pag_cnpj.getText();
+        String valorText = txt_pag_val.getText();
+        String situacao = cmb_pag_situacao.getValue();
+
+        // Verifica se algum campo está vazio
+        if (estadoPagamento == null || cnpj.isEmpty() || valorText.isEmpty() || situacao == null) {
+            showAlert(Alert.AlertType.ERROR, "Erro", "Preencha todos os campos antes de cadastrar o pagamento.");
+            return;
+        }
+
+        // Trata a exceção de conversão para double
+        double valor;
+        try {
+            valor = Double.parseDouble(valorText);
+        } catch (NumberFormatException e) {
+            showAlert(Alert.AlertType.ERROR, "Erro", "O valor deve ser numérico.");
+            return;
+        }
+        
+        String deleteQuery = "DELETE FROM pagamentos WHERE ID = ?";
+
+        try {
+            connect = DataBase.connectDb();
+            prepare = connect.prepareStatement(deleteQuery);
+
+            prepare.setInt(1, Integer.parseInt(txt_pag_id.getText()));
+
+            int rowsDeleted = prepare.executeUpdate();
+            if (rowsDeleted > 0) {
+                showAlert(Alert.AlertType.INFORMATION, "Information Message", "Pagamento deletado com sucesso!");
+                updateTable();
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (prepare != null) {
+                    prepare.close();
+                }
+                if (connect != null) {
+                    connect.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    
+    private boolean cnpjExistente(String cnpj) {
+        String query = "SELECT COUNT(*) FROM fornecedores WHERE ID = ? AND CNPJ = ?";
+        int count = 0;
+
+        try {
+            connect = DataBase.connectDb();
+            prepare = connect.prepareStatement(query);
+            prepare.setInt(1, Integer.parseInt(txt_pag_id.getText()));
+            prepare.setString(2, cnpj);
+            result = prepare.executeQuery();
+
+            if (result.next()) {
+                count = result.getInt(1);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (result != null) {
+                    result.close();
+                }
+                if (prepare != null) {
+                    prepare.close();
+                }
+                if (connect != null) {
+                    connect.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return count > 0;
+    }
+    
+    
+    
     public void updateTableCNPJ() {
         pag_tableView.setItems(FXCollections.observableArrayList());
         
