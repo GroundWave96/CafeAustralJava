@@ -21,6 +21,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
@@ -34,6 +35,9 @@ public class FXMLCadastroFornController {
 
     @FXML
     private ImageView img_cnpjCadConsult;
+
+    @FXML
+    private AnchorPane frm_cadastroadm;
 
     @FXML
     private TextField txt_cnpjCadForn;
@@ -104,6 +108,133 @@ public class FXMLCadastroFornController {
         }
     }
 
+    public void cadastrarFornecedor() {
+        // Verifica se os campos estão preenchidos
+        if (txt_userCadForn.getText().isEmpty() || txt_cnpjCadForn.getText().isEmpty()
+                || txt_telCadForn.getText().isEmpty() || txt_emailCadForn.getText().isEmpty()
+                || txt_senhaCadForn.getText().isEmpty()) {
+
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Message");
+            alert.setHeaderText(null);
+            alert.setContentText("Preencha todos os campos!");
+            alert.showAndWait();
+            return;
+        }
+
+        // Verifica se CNPJ contém apenas números
+        if (!txt_cnpjCadForn.getText().matches("\\d+")) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Message");
+            alert.setHeaderText(null);
+            alert.setContentText("CNPJ deve conter apenas números!");
+            alert.showAndWait();
+            return;
+        }
+
+        // Verifica se Telefone contém apenas números
+        if (!txt_telCadForn.getText().matches("\\d+")) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Message");
+            alert.setHeaderText(null);
+            alert.setContentText("Telefone deve conter apenas números!");
+            alert.showAndWait();
+            return;
+        }
+
+        // Verifica se Email possui exatamente um "@" e pelo menos um "."
+        if (!txt_emailCadForn.getText().contains("@") || !txt_emailCadForn.getText().contains(".")) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Message");
+            alert.setHeaderText(null);
+            alert.setContentText("Email deve conter um '@' e um '.'!");
+            alert.showAndWait();
+            return;
+        }
+
+        // Conectar ao banco de dados
+        connect = DataBase.connectDb();
+
+        try {
+            // Verifica se o CNPJ já existe
+            String checkCNPJ = "SELECT * FROM fornecedores WHERE CNPJ = ?";
+            prepare = connect.prepareStatement(checkCNPJ);
+            prepare.setString(1, txt_cnpjCadForn.getText());
+            result = prepare.executeQuery();
+
+            if (result.next()) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error Message");
+                alert.setHeaderText(null);
+                alert.setContentText("CNPJ já cadastrado!");
+                alert.showAndWait();
+                return;
+            }
+
+            // Verifica se o Email já existe
+            String checkEmail = "SELECT * FROM fornecedores WHERE Email = ?";
+            prepare = connect.prepareStatement(checkEmail);
+            prepare.setString(1, txt_emailCadForn.getText());
+            result = prepare.executeQuery();
+
+            if (result.next()) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error Message");
+                alert.setHeaderText(null);
+                alert.setContentText("Email já cadastrado!");
+                alert.showAndWait();
+                return;
+            }
+
+            // Inserir dados na tabela fornecedores
+            String sql = "INSERT INTO fornecedores (Nome, CNPJ, Telefone, Email, Senha) VALUES (?, ?, ?, ?, ?)";
+            prepare = connect.prepareStatement(sql);
+            prepare.setString(1, txt_userCadForn.getText());
+            prepare.setString(2, txt_cnpjCadForn.getText());
+            prepare.setString(3, txt_telCadForn.getText());
+            prepare.setString(4, txt_emailCadForn.getText());
+            prepare.setString(5, txt_senhaCadForn.getText());
+
+            prepare.executeUpdate();
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Information Message");
+            alert.setHeaderText(null);
+            alert.setContentText("Fornecedor cadastrado com sucesso!");
+
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+                // Fechar a janela atual
+                Stage currentStage = (Stage) frm_cadastroadm.getScene().getWindow();
+                currentStage.close();
+
+                // Carregar o novo FXML
+                Parent root = FXMLLoader.load(getClass().getResource("/br/com/fatec/view/FXML_admMenu.fxml"));
+                Stage stage = new Stage();
+                Scene scene = new Scene(root);
+
+                // Configurar e mostrar a nova janela
+                stage.setScene(scene);
+                stage.show();
+            }
+
+            // Limpar os campos após o cadastro
+            txt_userCadForn.clear();
+            txt_cnpjCadForn.clear();
+            txt_telCadForn.clear();
+            txt_emailCadForn.clear();
+            txt_senhaCadForn.clear();
+
+        } catch (SQLException | IOException e) {
+            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Message");
+            alert.setHeaderText(null);
+            alert.setContentText("Erro ao cadastrar fornecedor!");
+            alert.showAndWait();
+        }
+    }
+
 // Método auxiliar para limpar os campos de texto
     private void limparCampos() {
         txt_userCadForn.clear();
@@ -111,7 +242,6 @@ public class FXMLCadastroFornController {
         txt_emailCadForn.clear();
         txt_senhaCadForn.clear();
     }
-
 
     private boolean emailExists(String email) throws SQLException {
         String sql = "SELECT * FROM fornecedores WHERE Email = ?";
@@ -130,9 +260,8 @@ public class FXMLCadastroFornController {
                 checkPrepare.close();
             }
         }
-    }    
-    
-    
+    }
+
     public void atualizarFornecedor() {
         String cnpj = txt_cnpjCadForn.getText();
 
@@ -186,13 +315,13 @@ public class FXMLCadastroFornController {
                 }
                 if (!txt_emailCadForn.getText().equals(email)) {
                     if (emailExists(txt_emailCadForn.getText())) {
-                       Alert alert = new Alert(Alert.AlertType.ERROR);
-                       alert.setTitle("Error Message");
-                       alert.setHeaderText(null);
-                       alert.setContentText("Email já cadastrado!");
-                       alert.showAndWait();
-                       return;
-                   }                     
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Error Message");
+                        alert.setHeaderText(null);
+                        alert.setContentText("Email já cadastrado!");
+                        alert.showAndWait();
+                        return;
+                    }
                     hasChanges = true;
                 }
                 if (!txt_senhaCadForn.getText().equals(senha)) {
