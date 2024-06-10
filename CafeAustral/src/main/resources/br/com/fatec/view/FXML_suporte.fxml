@@ -40,7 +40,7 @@
                 <TableColumn fx:id="sup_col_id" prefWidth="49.0" text="ID" />
                 <TableColumn fx:id="sup_col_cnpj" prefWidth="144.0" text="CNPJ" />
                   <TableColumn fx:id="sup_col_sobre" prefWidth="117.0" text="SOBRE" />
-                  <TableColumn fx:id="pag_col_val" prefWidth="179.0" text="DESCRIÇÃO" />
+                  <TableColumn fx:id="pag_col_desc" prefWidth="179.0" text="DESCRIÇÃO" />
                   <TableColumn fx:id="sup_col_situacao" prefWidth="180.0" text="SITUAÇÃO" />
               </columns>
             </TableView>

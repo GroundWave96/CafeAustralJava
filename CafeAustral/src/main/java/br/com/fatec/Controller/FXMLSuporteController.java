@@ -66,17 +66,17 @@ public class FXMLSuporteController {
     }
 
     @FXML
-    private TableView<FXMLSuporteController.Suporte> sup_tableView;
+    private TableView<Suporte> sup_tableView;
     @FXML
-    private TableColumn<FXMLSuporteController.Suporte, Integer> sup_col_id;
+    private TableColumn<Suporte, Integer> sup_col_id;
     @FXML
-    private TableColumn<FXMLSuporteController.Suporte, String> sup_col_cnpj;
+    private TableColumn<Suporte, String> sup_col_cnpj;
     @FXML
-    private TableColumn<FXMLSuporteController.Suporte, String> sup_col_sobre;
+    private TableColumn<Suporte, String> sup_col_sobre;
     @FXML
-    private TableColumn<FXMLSuporteController.Suporte, String> sup_col_desc;
+    private TableColumn<Suporte, String> sup_col_desc;
     @FXML
-    private TableColumn<FXMLSuporteController.Suporte, String> sup_col_situacao;
+    private TableColumn<Suporte, String> sup_col_situacao;
 
     @FXML
     private TextField txt_sup_cnpj;
@@ -128,7 +128,7 @@ public class FXMLSuporteController {
 
         ObservableList<Suporte> supList = FXCollections.observableArrayList();
 
-        String query = "SELECT * FROM suporte WHERE CPNJ = ?";
+        String query = "SELECT * FROM suporte";
 
         connect = DataBase.connectDb();
 
