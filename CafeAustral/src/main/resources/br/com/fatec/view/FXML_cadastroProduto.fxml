@@ -52,27 +52,27 @@
       <JFXTextField fx:id="txt_cad_descProd" focusColor="#634832" labelFloat="true" layoutX="54.0" layoutY="201.0" prefHeight="36.0" prefWidth="262.0" promptText="Descrição" styleClass="font-text-field" stylesheets="@../css/loginDesing.css" unFocusColor="#dcc2a9" />
       <JFXTextField fx:id="txt_cad_cnpjProd" disable="true" focusColor="#634832" labelFloat="true" layoutX="54.0" layoutY="260.0" prefHeight="36.0" prefWidth="262.0" promptText="CNPJ" styleClass="font-text-field" stylesheets="@../css/loginDesing.css" unFocusColor="#dcc2a9" />
       <JFXTextField fx:id="txt_cad_qtdProd" focusColor="#634832" labelFloat="true" layoutX="54.0" layoutY="318.0" prefHeight="36.0" prefWidth="262.0" promptText="Quantidade" styleClass="font-text-field" stylesheets="@../css/loginDesing.css" unFocusColor="#dcc2a9" />
-      <JFXButton fx:id="btn_cadNewProd" buttonType="RAISED" layoutX="58.0" layoutY="437.0" onAction="#cadastrarProduto" prefHeight="40.0" prefWidth="110.0" style="-fx-background-color: #dcc2a9; -fx-background-radius: 25;" text="Cadastrar" textFill="#634832">
+      <JFXButton fx:id="btn_cadNewProd" buttonType="RAISED" layoutX="58.0" layoutY="437.0" prefHeight="40.0" prefWidth="110.0" style="-fx-background-color: #dcc2a9; -fx-background-radius: 25;" text="Cadastrar" textFill="#634832">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </JFXButton>
-      <JFXButton fx:id="btn_menuFornBack" buttonType="RAISED" layoutX="13.0" layoutY="553.0" onAction="#menuFornBack" prefHeight="36.0" prefWidth="70.0" style="-fx-background-color: #dcc2a9;" text="Voltar" textFill="#634832">
+      <JFXButton fx:id="btn_menuFornBack" buttonType="RAISED" layoutX="13.0" layoutY="553.0" prefHeight="36.0" prefWidth="70.0" style="-fx-background-color: #dcc2a9;" text="Voltar" textFill="#634832">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </JFXButton>
-      <JFXButton fx:id="btn_editCadProd" buttonType="RAISED" layoutX="201.0" layoutY="437.0" onAction="#editarProduto" prefHeight="40.0" prefWidth="110.0" style="-fx-background-color: #dcc2a9; -fx-background-radius: 25;" text="Editar" textFill="#634832">
+      <JFXButton fx:id="btn_editCadProd" buttonType="RAISED" layoutX="201.0" layoutY="437.0" prefHeight="40.0" prefWidth="110.0" style="-fx-background-color: #dcc2a9; -fx-background-radius: 25;" text="Editar" textFill="#634832">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </JFXButton>
-      <JFXButton fx:id="btn_clearCadProd" buttonType="RAISED" layoutX="58.0" layoutY="488.0" onAction="#limparCampos" prefHeight="40.0" prefWidth="110.0" style="-fx-background-color: #dcc2a9; -fx-background-radius: 25;" text="Limpar" textFill="#634832">
+      <JFXButton fx:id="btn_clearCadProd" buttonType="RAISED" layoutX="58.0" layoutY="488.0" prefHeight="40.0" prefWidth="110.0" style="-fx-background-color: #dcc2a9; -fx-background-radius: 25;" text="Limpar" textFill="#634832">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </JFXButton>
-      <JFXButton fx:id="btn_delCadProd" buttonType="RAISED" layoutX="201.0" layoutY="488.0" onAction="#deletarProduto" prefHeight="40.0" prefWidth="110.0" style="-fx-background-color: #dcc2a9; -fx-background-radius: 25;" text="Excluir" textFill="#634832">
+      <JFXButton fx:id="btn_delCadProd" buttonType="RAISED" layoutX="201.0" layoutY="488.0" prefHeight="40.0" prefWidth="110.0" style="-fx-background-color: #dcc2a9; -fx-background-radius: 25;" text="Excluir" textFill="#634832">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
