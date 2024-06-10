@@ -44,14 +44,19 @@
                </stylesheets>
             </TableView>
          </children></AnchorPane>
-      <JFXTextField fx:id="consult_pag_busca" focusColor="#634832" labelFloat="true" layoutX="345.0" layoutY="87.0" prefHeight="36.0" prefWidth="324.0" promptText="Buscar" styleClass="font-text-field" stylesheets="@../css/loginDesing.css" unFocusColor="#dcc2a9" />
+      <JFXTextField fx:id="consult_pag_busca" focusColor="#634832" labelFloat="true" layoutX="480.0" layoutY="87.0" prefHeight="36.0" prefWidth="367.0" promptText="Buscar" styleClass="font-text-field" stylesheets="@../css/loginDesing.css" unFocusColor="#dcc2a9" />
       <JFXButton fx:id="btn_menuFornecBack" buttonType="RAISED" layoutX="14.0" layoutY="550.0" onAction="#menuFornecBack" prefHeight="36.0" prefWidth="70.0" style="-fx-background-color: #dcc2a9;" text="Voltar" textFill="#634832">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </JFXButton>
-      <JFXComboBox fx:id="cmb_pag_filtro" focusColor="#634832" labelFloat="true" layoutX="33.0" layoutY="87.0" prefHeight="36.0" prefWidth="299.0" promptText="Filtro" styleClass="font-text-field" stylesheets="@../css/loginDesing.css" unFocusColor="#dcc2a9" />
-      <JFXButton fx:id="btn_buscar" buttonType="RAISED" layoutX="681.0" layoutY="87.0" onAction="#buscaAvancada" prefHeight="36.0" prefWidth="97.0" style="-fx-background-color: #dcc2a9;" text="Buscar" textFill="#634832">
+      <JFXComboBox fx:id="cmb_pag_filtro" focusColor="#634832" labelFloat="true" layoutX="33.0" layoutY="87.0" prefHeight="36.0" prefWidth="427.0" promptText="Filtro" styleClass="font-text-field" stylesheets="@../css/loginDesing.css" unFocusColor="#dcc2a9" />
+      <JFXButton fx:id="btn_buscar" buttonType="RAISED" layoutX="862.0" layoutY="87.0" onAction="#buscaAvancada" prefHeight="36.0" prefWidth="97.0" style="-fx-background-color: #dcc2a9;" text="Buscar" textFill="#634832">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="btn_limpar" buttonType="RAISED" layoutX="970.0" layoutY="87.0" onAction="#botaoLimpar" prefHeight="36.0" prefWidth="97.0" style="-fx-background-color: #dcc2a9;" text="Limpar" textFill="#634832">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>

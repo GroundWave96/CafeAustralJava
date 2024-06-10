@@ -68,23 +68,21 @@ public class FXMLPagamentosController {
             return situacao;
         }
     }
-    
+
     @FXML
     private JFXButton btn_menuFornecBack;
-    
+
     @FXML
     private JFXButton btn_menuAdmBack;
 
     @FXML
     private JFXTextField consult_pag_busca;
-    
+
     @FXML
     private ComboBox<String> cmb_pag_filtro;
-    
+
     @FXML
     private JFXButton btn_buscar;
-    
-    
 
     @FXML
     private TableView<Pagamento> consutlPag_tabelview;
@@ -98,16 +96,16 @@ public class FXMLPagamentosController {
     private TableColumn<Pagamento, Double> consult_pag_val;
     @FXML
     private TableColumn<Pagamento, String> consult_pag_situacao;
-    
+
     private Connection connect;
     private PreparedStatement prepare;
     private ResultSet result;
-    
+
     @FXML
     public void initialize() {
-        
+
         cmb_pag_filtro.getItems().addAll("ID", "Entrega", "Valor", "Situação");
-        
+
         // Configure colunas da tabela
         consult_pag_id.setCellValueFactory(new PropertyValueFactory<>("id"));
         consult_pag_estado.setCellValueFactory(new PropertyValueFactory<>("estadoDoPagamento"));
@@ -118,9 +116,15 @@ public class FXMLPagamentosController {
         updateTable();
 
     }
-
-        public String filtro;
     
+    public void botaoLimpar(){
+        updateTable();
+        cmb_pag_filtro.setValue(null);
+        consult_pag_busca.clear();
+    }
+
+    public String filtro;
+
     public void buscaAvancada() {
         ObservableList<Pagamento> pagList = FXCollections.observableArrayList();
 
@@ -128,18 +132,16 @@ public class FXMLPagamentosController {
 
         connect = DataBase.connectDb();
 
-        
-        if (cmb_pag_filtro.getValue() == "ID"){
-        query = "SELECT * FROM pagamentos WHERE ID = ? AND CNPJ = ?";
-        }else if (cmb_pag_filtro.getValue() == "Entrega"){
-        query = "SELECT * FROM pagamentos WHERE EstadoDoPagamento = ? AND CNPJ = ?";
-        }else if (cmb_pag_filtro.getValue() == "Valor"){
-        query = "SELECT * FROM pagamentos WHERE Valor = ? AND CNPJ = ?";
-        }else if (cmb_pag_filtro.getValue() == "Situação"){
-        query = "SELECT * FROM pagamentos WHERE Situacao = ? AND CNPJ = ?";
+        if (cmb_pag_filtro.getValue() == "ID") {
+            query = "SELECT * FROM pagamentos WHERE ID = ? AND CNPJ = ?";
+        } else if (cmb_pag_filtro.getValue() == "Entrega") {
+            query = "SELECT * FROM pagamentos WHERE EstadoDoPagamento = ? AND CNPJ = ?";
+        } else if (cmb_pag_filtro.getValue() == "Valor") {
+            query = "SELECT * FROM pagamentos WHERE Valor = ? AND CNPJ = ?";
+        } else if (cmb_pag_filtro.getValue() == "Situação") {
+            query = "SELECT * FROM pagamentos WHERE Situacao = ? AND CNPJ = ?";
         }
-        
-        
+
         try {
             prepare = connect.prepareStatement(query);
             prepare.setString(1, consult_pag_busca.getText());
@@ -177,7 +179,7 @@ public class FXMLPagamentosController {
             }
         }
     }
-    
+
     public void updateTable() {
         ObservableList<Pagamento> pagList = FXCollections.observableArrayList();
 

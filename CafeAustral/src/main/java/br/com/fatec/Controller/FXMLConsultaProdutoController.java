@@ -206,6 +206,15 @@ public class FXMLConsultaProdutoController {
 
     public void updateProduct() {
         
+        if (!txt_consult_valProd.getText().contains(".")) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Message");
+            alert.setHeaderText(null);
+            alert.setContentText("O separador de decimal deve ser com ponto!");
+            alert.showAndWait();
+            return;
+        }
+        
         if (txt_consult_nomeProd.getText().isEmpty() || txt_consult_tipoProd.getText().isEmpty()
                 || txt_consult_descProd.getText().isEmpty() || txt_consult_qtdProd.getText().isEmpty()
                 || txt_consult_valProd.getText().isEmpty() || txt_consult_cnpjProd.getText().isEmpty()) {

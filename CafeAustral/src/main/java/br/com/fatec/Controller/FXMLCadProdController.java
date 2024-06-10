@@ -181,6 +181,15 @@ public class FXMLCadProdController {
             alert.showAndWait();
             return;
         }
+        
+        if (!txt_cad_valProd.getText().contains(".")) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Message");
+            alert.setHeaderText(null);
+            alert.setContentText("O separador de decimal deve ser com ponto!");
+            alert.showAndWait();
+            return;
+        }
 
         String insertQuery = "INSERT INTO produtos (CNPJ, NomeDoProduto, Tipo, Descricao, Valor, Quantidade) VALUES (?, ?, ?, ?, ?, ?)";
 
@@ -208,6 +217,7 @@ public class FXMLCadProdController {
     }
 
     public void updateTable() {
+                
         cadProd_tableView.setItems(FXCollections.observableArrayList());
 
         ObservableList<Produto> productList = FXCollections.observableArrayList();
@@ -277,6 +287,16 @@ public class FXMLCadProdController {
             return;
         }
 
+        
+        if (!txt_cad_valProd.getText().contains(".")) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Message");
+            alert.setHeaderText(null);
+            alert.setContentText("O separador de decimal deve ser com ponto!");
+            alert.showAndWait();
+            return;
+        }
+        
         String updateQuery = "UPDATE produtos SET NomeDoProduto = ?, Tipo = ?, Descricao = ?, Valor = ?, Quantidade = ? WHERE ID = ?";
 
         try {
