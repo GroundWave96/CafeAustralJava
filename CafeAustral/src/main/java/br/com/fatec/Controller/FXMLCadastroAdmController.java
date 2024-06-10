@@ -71,6 +71,45 @@ public class FXMLCadastroAdmController implements Initializable {
         cmb_genCadAdm.getItems().addAll("Masculino", "Feminino", "Outro");
     }
 
+    public void pesquisaEmail() {
+        String query = "SELECT * FROM administradores WHERE Email = ?";
+
+        conn = DataBase.connectDb();
+
+        try {
+            stmt = conn.prepareStatement(query);
+            stmt.setString(1, txt_emailCadAdm.getText());
+            result = stmt.executeQuery();
+
+            while (result.next()) {
+                int id = result.getInt("ID");
+                String nome = result.getString("Nome");
+                String sobrenome = result.getString("Sobrenome");
+                String genero = result.getString("Genero");
+                String email = result.getString("Email");
+                String senha = result.getString("Senha");
+
+                txt_userCadAdm.setText(nome);
+                cmb_genCadAdm.setValue(genero);
+                txt_telCadAdm.setText(sobrenome);
+                txt_senhaCadAdm.setText(senha);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closeConnection();
+        }
+    }
+
+    public void limparCampos() {
+        txt_userCadAdm.setText("");
+        cmb_genCadAdm.setValue(null);
+        txt_telCadAdm.setText("");
+        txt_senhaCadAdm.setText("");
+        txt_emailCadAdm.setText("");
+    }
+
     public void cadastrarAdministrador() {
         // Verifica se todos os campos estão preenchidos
         if (txt_emailCadAdm.getText().isEmpty() || cmb_genCadAdm.getItems().isEmpty() || txt_userCadAdm.getText().isEmpty() || txt_telCadAdm.getText().isEmpty() || txt_senhaCadAdm.getText().isEmpty()) {
@@ -395,6 +434,22 @@ public class FXMLCadastroAdmController implements Initializable {
         alert.setHeaderText(null);
         alert.setContentText(mensagem);
         alert.showAndWait();
+    }
+
+    private void closeConnection() {
+        try {
+            if (result != null) {
+                result.close();
+            }
+            if (stmt != null) {
+                stmt.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
 }
