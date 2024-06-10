@@ -82,6 +82,9 @@ public class FXMLCadProdController {
 
     @FXML
     private JFXButton btn_menuFornBack;
+    
+    @FXML
+    private TextField txt_cad_ID;
 
     @FXML
     private TextField txt_cad_cnpjProd;
@@ -162,9 +165,37 @@ public class FXMLCadProdController {
             txt_cad_descProd.setText(selectedProduto.getDescricao());
             txt_cad_valProd.setText(Double.toString(selectedProduto.getValor()));
             txt_cad_qtdProd.setText(Integer.toString(selectedProduto.getQuantidade()));
+            txt_cad_ID.setText(Integer.toString(selectedProduto.getId()));
         }
     }
     
+    public void cadastrarProduto() {
+    String insertQuery = "INSERT INTO produtos (CNPJ, NomeDoProduto, Tipo, Descricao, Valor, Quantidade) VALUES (?, ?, ?, ?, ?, ?)";
+
+        try {
+            connect = DataBase.connectDb();
+            prepare = connect.prepareStatement(insertQuery);
+            prepare.setString(1, txt_cad_cnpjProd.getText());
+            prepare.setString(2, txt_cad_nomeProd.getText());
+            prepare.setString(3, txt_cad_tipoProd.getText());
+            prepare.setString(4, txt_cad_descProd.getText());
+            prepare.setDouble(5, Double.parseDouble(txt_cad_valProd.getText()));
+            prepare.setInt(6, Integer.parseInt(txt_cad_qtdProd.getText()));
+
+            int rowsInserted = prepare.executeUpdate();
+            if (rowsInserted > 0) {
+                showAlert(Alert.AlertType.INFORMATION, "Information Message", "Produto cadastrado com sucesso!");
+                updateTable();
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closeConnection();
+        }
+    }
+    
+  
     public void updateTable() {
         cadProd_tableView.setItems(FXCollections.observableArrayList());
 
@@ -222,7 +253,7 @@ public class FXMLCadProdController {
     }
     
     public void updateProduct() {
-        String updateQuery = "UPDATE produtos SET NomeDoProduto = ?, Tipo = ?, Descricao = ?, Valor = ?, Quantidade = ? WHERE CNPJ = ?";
+        String updateQuery = "UPDATE produtos SET NomeDoProduto = ?, Tipo = ?, Descricao = ?, Valor = ?, Quantidade = ? WHERE ID = ?";
 
         try {
             connect = DataBase.connectDb(); // Obtenha a conexão com o banco de dados
@@ -234,7 +265,7 @@ public class FXMLCadProdController {
             prepare.setString(3, txt_cad_descProd.getText());
             prepare.setDouble(4, Double.parseDouble(txt_cad_valProd.getText()));
             prepare.setInt(5, Integer.parseInt(txt_cad_qtdProd.getText()));
-            prepare.setString(6, txt_cad_cnpjProd.getText());
+            prepare.setString(6, txt_cad_ID.getText());
 
             int rowsUpdated = prepare.executeUpdate();
             if (rowsUpdated > 0) {
@@ -259,12 +290,12 @@ public class FXMLCadProdController {
     }
     
     public void deleteProduct() {
-        String deleteQuery = "DELETE FROM produtos WHERE CNPJ = ?";
+        String deleteQuery = "DELETE FROM produtos WHERE ID = ?";
 
         try {
             connect = DataBase.connectDb();
             prepare = connect.prepareStatement(deleteQuery);
-            prepare.setString(1, txt_cad_cnpjProd.getText());
+            prepare.setString(1, txt_cad_ID.getText());
 
             int rowsDeleted = prepare.executeUpdate();
             if (rowsDeleted > 0) {

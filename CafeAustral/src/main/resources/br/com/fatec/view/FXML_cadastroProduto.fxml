@@ -52,7 +52,7 @@
       <JFXTextField fx:id="txt_cad_descProd" focusColor="#634832" labelFloat="true" layoutX="54.0" layoutY="201.0" prefHeight="36.0" prefWidth="262.0" promptText="Descrição" styleClass="font-text-field" stylesheets="@../css/loginDesing.css" unFocusColor="#dcc2a9" />
       <JFXTextField fx:id="txt_cad_cnpjProd" disable="true" focusColor="#634832" labelFloat="true" layoutX="54.0" layoutY="260.0" prefHeight="36.0" prefWidth="262.0" promptText="CNPJ" styleClass="font-text-field" stylesheets="@../css/loginDesing.css" unFocusColor="#dcc2a9" />
       <JFXTextField fx:id="txt_cad_qtdProd" focusColor="#634832" labelFloat="true" layoutX="54.0" layoutY="318.0" prefHeight="36.0" prefWidth="262.0" promptText="Quantidade" styleClass="font-text-field" stylesheets="@../css/loginDesing.css" unFocusColor="#dcc2a9" />
-      <JFXButton fx:id="btn_cadNewProd" buttonType="RAISED" layoutX="58.0" layoutY="437.0" prefHeight="40.0" prefWidth="110.0" style="-fx-background-color: #dcc2a9; -fx-background-radius: 25;" text="Cadastrar" textFill="#634832">
+      <JFXButton fx:id="btn_cadNewProd" buttonType="RAISED" layoutX="58.0" layoutY="437.0" onAction="#cadastrarProduto" prefHeight="40.0" prefWidth="110.0" style="-fx-background-color: #dcc2a9; -fx-background-radius: 25;" text="Cadastrar" textFill="#634832">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
@@ -78,5 +78,6 @@
          </font>
       </JFXButton>
       <JFXTextField fx:id="txt_cad_valProd" focusColor="#634832" labelFloat="true" layoutX="55.0" layoutY="382.0" prefHeight="36.0" prefWidth="262.0" promptText="Valor" styleClass="font-text-field" stylesheets="@../css/loginDesing.css" unFocusColor="#dcc2a9" />
+      <JFXTextField fx:id="txt_cad_ID" disable="true" focusColor="#634832" labelFloat="true" layoutX="11.0" layoutY="85.0" prefHeight="36.0" prefWidth="42.0" promptText="ID" styleClass="font-text-field" stylesheets="@../css/loginDesing.css" unFocusColor="#dcc2a9" />
    </children>
 </AnchorPane>
