@@ -36,7 +36,7 @@
                 <TableColumn fx:id="consult_pag_estado" prefWidth="235.0" text="ESTADO" />
                   <TableColumn fx:id="consult_pag_cnpj" prefWidth="289.0" text="CNPJ" />
                   <TableColumn fx:id="consult_pag_val" prefWidth="142.0" text="VALOR" />
-                  <TableColumn fx:id="consult_pag_situacao" prefWidth="289.0" text="SITUAÇÃO" />
+                  <TableColumn fx:id="consult_pag_situacao" prefWidth="288.0" text="SITUAÇÃO" />
               </columns>
                <stylesheets>
                   <URL value="@../css/admMenuDesign.css" />
