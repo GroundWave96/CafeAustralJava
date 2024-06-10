@@ -47,11 +47,6 @@
                   <Font size="20.0" />
                </font>
             </Label>
-            <JFXButton fx:id="btn_cadFornAdm" buttonType="RAISED" layoutX="46.0" layoutY="426.0" onAction="#cadastrarFornecedor" prefHeight="50.0" prefWidth="420.0" style="-fx-background-color: #dcc2a9;" text="Cadastrar" textFill="#634832">
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font>
-            </JFXButton>
             <JFXPasswordField fx:id="txt_senhaCadForn" focusColor="#634832" labelFloat="true" layoutX="46.0" layoutY="367.0" prefHeight="25.0" prefWidth="420.0" promptText="Senha" unFocusColor="#dcc2a9">
                <font>
                   <Font size="14.0" />
@@ -72,12 +67,12 @@
                   <Font size="14.0" />
                </font>
             </JFXTextField>
-            <JFXButton fx:id="btn_editFornAdm" buttonType="RAISED" layoutX="46.0" layoutY="512.0" onAction="#atualizarFornecedor" prefHeight="45.0" prefWidth="200.0" style="-fx-background-color: #dcc2a9;" text="Editar" textFill="#634832">
+            <JFXButton fx:id="btn_editFornAdm" buttonType="RAISED" layoutX="46.0" layoutY="449.0" onAction="#atualizarFornecedor" prefHeight="45.0" prefWidth="200.0" style="-fx-background-color: #dcc2a9;" text="Editar" textFill="#634832">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </JFXButton>
-            <JFXButton fx:id="btn_delFornAdm" buttonType="RAISED" layoutX="263.0" layoutY="512.0" onAction="#excluirFornecedor" prefHeight="45.0" prefWidth="200.0" style="-fx-background-color: #dcc2a9;" text="Excluir" textFill="#634832">
+            <JFXButton fx:id="btn_delFornAdm" buttonType="RAISED" layoutX="263.0" layoutY="449.0" onAction="#excluirFornecedor" prefHeight="45.0" prefWidth="200.0" style="-fx-background-color: #dcc2a9;" text="Excluir" textFill="#634832">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
