@@ -112,6 +112,27 @@ public class FXMLCadastroFornController {
         txt_senhaCadForn.clear();
     }
 
+
+    private boolean emailExists(String email) throws SQLException {
+        String sql = "SELECT * FROM fornecedores WHERE Email = ?";
+        PreparedStatement checkPrepare = null;
+        ResultSet checkResult = null;
+        try {
+            checkPrepare = connect.prepareStatement(sql);
+            checkPrepare.setString(1, email);
+            checkResult = checkPrepare.executeQuery();
+            return checkResult.next();
+        } finally {
+            if (checkResult != null) {
+                checkResult.close();
+            }
+            if (checkPrepare != null) {
+                checkPrepare.close();
+            }
+        }
+    }    
+    
+    
     public void atualizarFornecedor() {
         String cnpj = txt_cnpjCadForn.getText();
 
@@ -164,6 +185,14 @@ public class FXMLCadastroFornController {
                     hasChanges = true;
                 }
                 if (!txt_emailCadForn.getText().equals(email)) {
+                    if (emailExists(txt_emailCadForn.getText())) {
+                       Alert alert = new Alert(Alert.AlertType.ERROR);
+                       alert.setTitle("Error Message");
+                       alert.setHeaderText(null);
+                       alert.setContentText("Email já cadastrado!");
+                       alert.showAndWait();
+                       return;
+                   }                     
                     hasChanges = true;
                 }
                 if (!txt_senhaCadForn.getText().equals(senha)) {
